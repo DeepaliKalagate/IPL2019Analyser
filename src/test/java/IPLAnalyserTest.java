@@ -106,4 +106,19 @@ public class IPLAnalyserTest
             Assert.assertEquals(CSVBuilderException.ExceptionType.IPL_FILE_PROBLEM,e.type);
         }
     }
+
+    @Test
+    public void givenIPLMostRunsData_MissingHeader_ShouldReturnException()
+    {
+        try
+        {
+            ExpectedException exceptionRule=ExpectedException.none();
+            exceptionRule.expect(CSVBuilderException.class);
+            iplAnalyser.loadIPLAnalserData(WRONG_IPL_FILE_TYPE);
+        }
+        catch (CSVBuilderException e)
+        {
+            Assert.assertEquals(CSVBuilderException.ExceptionType.IPL_FILE_PROBLEM,e.type);
+        }
+    }
 }
