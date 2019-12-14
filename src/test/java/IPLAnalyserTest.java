@@ -9,7 +9,7 @@ public class IPLAnalyserTest
     private static final String IPL_FILE_PATH="/home/admin1/Desktop/IPL2019Analyser/src/test/resources/IPL2019FactsheetMostRuns.csv";
     private static final String IPL_EMPTY_FILE_PATH="/home/admin1/Desktop/IPL2019Analyser/src/test/resources/IPL2019MostRuns.csv";
     private static final String IPL_WRONG_FILE_PATH = "./src/main/resources/IndiaStateCensusData.csv";
-    private static final String WRONG_IPL_FILE_TYPE="/home/admin1/Desktop/CensusAnalyser/src/test/resources/IPL2019MostRunsFile.csv";
+    private static final String WRONG_IPL_FILE_TYPE="/home/admin1/Desktop/CensusAnalyser/src/test/resources/IPL2019MostRunsFile11.csv";
     IPLAnalyser iplAnalyser=new IPLAnalyser();
 
     @Test
@@ -109,6 +109,21 @@ public class IPLAnalyserTest
 
     @Test
     public void givenIPLMostRunsData_MissingHeader_ShouldReturnException()
+    {
+        try
+        {
+            ExpectedException exceptionRule=ExpectedException.none();
+            exceptionRule.expect(CSVBuilderException.class);
+            iplAnalyser.loadIPLAnalserData(WRONG_IPL_FILE_TYPE);
+        }
+        catch (CSVBuilderException e)
+        {
+            Assert.assertEquals(CSVBuilderException.ExceptionType.IPL_FILE_PROBLEM,e.type);
+        }
+    }
+
+    @Test
+    public void givenIPLMostRunsData_WhenIncorrectFileName_ShouldReturnException()
     {
         try
         {
