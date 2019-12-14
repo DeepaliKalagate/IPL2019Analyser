@@ -1,8 +1,12 @@
 import com.bridgelabz.CSVBuilderException;
+import com.google.gson.Gson;
 import ipl2019analyser.IPLAnalyser;
+import ipl2019analyser.IPLMostRunsData;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
+import java.util.List;
 
 public class IPLAnalyserTest
 {
@@ -136,4 +140,18 @@ public class IPLAnalyserTest
             Assert.assertEquals(CSVBuilderException.ExceptionType.IPL_FILE_PROBLEM,e.type);
         }
     }
+
+    @Test
+    public void givenUSCensusData_WhenSortedOnDensity_ShouldReturnSortedResult()
+    {
+        try
+        {
+            List<IPLMostRunsData> sortedCensusData = iplAnalyser.sortByAvg(IPL_FILE_PATH);
+            Assert.assertEquals("MS Dhoni",sortedCensusData.get(0).player);
+        }
+        catch (CSVBuilderException e)
+        {
+        }
+    }
+
 }
