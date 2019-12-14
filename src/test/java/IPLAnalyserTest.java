@@ -142,7 +142,7 @@ public class IPLAnalyserTest
     }
 
     @Test
-    public void givenUSCensusData_WhenSortedOnDensity_ShouldReturnSortedResult()
+    public void givenUSCensusData_WhenSortedOnAverage_ShouldReturnSortedResult()
     {
         try
         {
@@ -154,4 +154,16 @@ public class IPLAnalyserTest
         }
     }
 
+    @Test
+    public void givenUSCensusData_WhenSortedOnStrikeRate_ShouldReturnSortedResult()
+    {
+        try
+        {
+            List<IPLMostRunsData> sortedCensusData = iplAnalyser.sortByStrikeRate(IPL_FILE_PATH);
+            Assert.assertEquals("Ishant Sharma",sortedCensusData.get(0).player);
+        }
+        catch (CSVBuilderException e)
+        {
+        }
+    }
 }

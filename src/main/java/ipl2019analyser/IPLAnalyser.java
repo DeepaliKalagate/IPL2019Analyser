@@ -48,4 +48,12 @@ public class IPLAnalyser
         list.sort(comparator);
         return list;
     }
+
+    public List<IPLMostRunsData> sortByStrikeRate(String iplFilePath) throws CSVBuilderException
+    {
+        loadIPLAnalserData(iplFilePath);
+        Comparator<IPLMostRunsData> comparator=(s1,s2)-> (int) (s2.getSr()-s1.getSr());
+        list.sort(comparator);
+        return list;
+    }
 }
