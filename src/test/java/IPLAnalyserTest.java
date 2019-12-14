@@ -2,6 +2,7 @@ import com.bridgelabz.CSVBuilderException;
 import com.google.gson.Gson;
 import ipl2019analyser.IPLAnalyser;
 import ipl2019analyser.IPLMostRunsData;
+import ipl2019analyser.SortByBasedOnField;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -44,7 +45,7 @@ public class IPLAnalyserTest
         try
         {
             int result=iplAnalyser.loadIPLAnalserData(IPL_FILE_PATH);
-            Assert.assertEquals(101,result);
+            Assert.assertEquals(100,result);
         }
         catch (CSVBuilderException e)
         {
@@ -146,11 +147,14 @@ public class IPLAnalyserTest
     {
         try
         {
-            List<IPLMostRunsData> sortedCensusData = iplAnalyser.sortByAvg(IPL_FILE_PATH);
-            Assert.assertEquals("MS Dhoni",sortedCensusData.get(0).player);
+            iplAnalyser.loadIPLAnalserData(IPL_FILE_PATH);
+            String sortedData = iplAnalyser.getSortByTopAverage(SortByBasedOnField.Average);
+            IPLMostRunsData[] censusCSV = new Gson().fromJson(sortedData, IPLMostRunsData[].class);
+            Assert.assertEquals("MS Dhoni", censusCSV[0].player);
         }
         catch (CSVBuilderException e)
         {
+            Assert.assertEquals(CSVBuilderException.ExceptionType.IPL_FILE_PROBLEM, e.type);
         }
     }
 
@@ -159,11 +163,14 @@ public class IPLAnalyserTest
     {
         try
         {
-            List<IPLMostRunsData> sortedCensusData = iplAnalyser.sortByStrikeRate(IPL_FILE_PATH);
-            Assert.assertEquals("Ishant Sharma",sortedCensusData.get(0).player);
+            iplAnalyser.loadIPLAnalserData(IPL_FILE_PATH);
+            String sortedData = iplAnalyser.getSortByTopAverage(SortByBasedOnField.Strike_Rate);
+            IPLMostRunsData[] censusCSV = new Gson().fromJson(sortedData, IPLMostRunsData[].class);
+            Assert.assertEquals("Ishant Sharma", censusCSV[0].player);
         }
         catch (CSVBuilderException e)
         {
+            Assert.assertEquals(CSVBuilderException.ExceptionType.IPL_FILE_PROBLEM, e.type);
         }
     }
 }
