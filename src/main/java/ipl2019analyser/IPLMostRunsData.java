@@ -36,22 +36,4 @@ public class IPLMostRunsData
     public IPLMostRunsData()
     {
     }
-
-    public IPLMostRunsData(int pos, String player, int mat, int inns, int no, int runs, String hs, String avg, int bf, double sr, int hundred, int fifty, int fours, int sixes)
-    {
-        this.pos = pos;
-        this.player = player;
-        this.mat = mat;
-        this.inns = inns;
-        this.no = no;
-        this.runs = runs;
-        this.hs = hs;
-        this.avg = avg;
-        this.bf = bf;
-        this.sr = sr;
-        this.hundred = hundred;
-        this.fifty = fifty;
-        this.fours = fours;
-        this.sixes = sixes;
-    }
 }

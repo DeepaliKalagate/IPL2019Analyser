@@ -8,6 +8,7 @@ public class IPLAnalyserTest
 {
     private static final String IPL_FILE_PATH="/home/admin1/Desktop/IPL2019Analyser/src/test/resources/IPL2019FactsheetMostRuns.csv";
     private static final String IPL_EMPTY_FILE_PATH="/home/admin1/Desktop/IPL2019Analyser/src/test/resources/IPL2019MostRuns.csv";
+
     IPLAnalyser iplAnalyser=new IPLAnalyser();
 
     @Test
@@ -18,7 +19,7 @@ public class IPLAnalyserTest
     }
 
     @Test
-    public void givenIPLDMostRunsData_WhenFileIsEmpty_ShouldThrowException()
+    public void givenIPLMostRunsData_WhenFileIsEmpty_ShouldThrowException()
     {
         try
         {
@@ -29,6 +30,19 @@ public class IPLAnalyserTest
         catch (CSVBuilderException e)
         {
             Assert.assertEquals(CSVBuilderException.ExceptionType.UNABLE_TO_PARSE, e.type);
+        }
+    }
+
+    @Test
+    public void givenIPLMostRunsData_CheckRecords_ShouldReturnExactCount()
+    {
+        try
+        {
+            int result=iplAnalyser.loadIPLAnalserData(IPL_FILE_PATH);
+            Assert.assertEquals(101,result);
+        }
+        catch (CSVBuilderException e)
+        {
         }
     }
 }
