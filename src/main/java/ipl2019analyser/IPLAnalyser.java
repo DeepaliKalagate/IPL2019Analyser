@@ -36,10 +36,18 @@ public class IPLAnalyser
         return false;
     }
 
-    public boolean CheckIPLDataFileIsEmptyOrNot(String iplFilePath)
+    public boolean checkIPLDataFileIsEmptyOrNot(String iplFilePath)
     {
         File file=new File(iplFilePath);
         if(file.length()==0)
+            return true;
+        return false;
+    }
+
+    public boolean checkIPLMostRunsDataFileCanRead(String iplFilePath)
+    {
+        File file=new File(iplFilePath);
+        if (file.canRead())
             return true;
         return false;
     }
