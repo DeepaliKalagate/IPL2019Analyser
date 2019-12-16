@@ -66,7 +66,7 @@ public class IPLAnalyser
         return false;
     }
 
-    public int loadIPLAnalserData(String iplFilePath) throws CSVBuilderException
+    public int loadIPLMostRunsAnalserData(String iplFilePath) throws CSVBuilderException
     {
         try (Reader reader = Files.newBufferedReader(Paths.get(iplFilePath));)
         {

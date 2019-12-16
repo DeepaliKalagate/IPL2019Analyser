@@ -9,7 +9,8 @@ import org.junit.rules.ExpectedException;
 
 public class IPLAnalyserTest
 {
-    private static final String IPL_FILE_PATH="/home/admin1/Desktop/IPL2019Analyser/src/test/resources/IPL2019FactsheetMostRuns.csv";
+    private static final String IPL_MOST_RUNS_FILE_PATH ="/home/admin1/Desktop/IPL2019Analyser/src/test/resources/IPL2019FactsheetMostRuns.csv";
+    private static final String IPL_MOST_WKTS_FILE_PATH="/home/admin1/Desktop/IPL2019Analyser/src/test/resources/IPL2019FactsheetMostWkts.csv";
     private static final String IPL_EMPTY_FILE_PATH="/home/admin1/Desktop/IPL2019Analyser/src/test/resources/IPL2019MostRuns.csv";
     private static final String IPL_WRONG_FILE_PATH = "./src/main/resources/IndiaStateCensusData.csv";
     private static final String WRONG_IPL_FILE_TYPE="/home/admin1/Desktop/CensusAnalyser/src/test/resources/IPL2019MostRunsFile11.csv";
@@ -18,28 +19,28 @@ public class IPLAnalyserTest
     @Test
     public void givenIPLMostRunsData_CheckFileIsPresentOrNot_ShouldReturnTrueOrFalse()
     {
-            boolean result = iplAnalyser.checkIPLDataFile(IPL_FILE_PATH);
+            boolean result = iplAnalyser.checkIPLDataFile(IPL_MOST_RUNS_FILE_PATH);
             Assert.assertEquals(true,result);
     }
 
     @Test
     public void givenIPLMostRunsData_CheckFileIsEmptyOrNot_IfValidShouldReturnTrueOrFalse()
     {
-        boolean result=iplAnalyser.checkIPLDataFileIsEmptyOrNot(IPL_FILE_PATH);
+        boolean result=iplAnalyser.checkIPLDataFileIsEmptyOrNot(IPL_MOST_RUNS_FILE_PATH);
         Assert.assertEquals(false,result);
     }
 
     @Test
     public void gievnIPLMostRunsDataFile_CheckFileCanRead_IfValidShouldReturnTrueOrFalse()
     {
-        boolean result=iplAnalyser.checkIPLMostRunsDataFileCanRead(IPL_FILE_PATH);
+        boolean result=iplAnalyser.checkIPLMostRunsDataFileCanRead(IPL_MOST_RUNS_FILE_PATH);
         Assert.assertEquals(true,result);
     }
 
     @Test
     public void gievnIPLMostRunsDataFile_CheckFileIsHiddenOrNot_IfValidShouldReturnTrueOrFalse()
     {
-        boolean result=iplAnalyser.checkIPLMostRunsDataFileIsHidden(IPL_FILE_PATH);
+        boolean result=iplAnalyser.checkIPLMostRunsDataFileIsHidden(IPL_MOST_RUNS_FILE_PATH);
         Assert.assertEquals(false,result);
     }
 
@@ -50,7 +51,7 @@ public class IPLAnalyserTest
         {
             ExpectedException exceptionRule = ExpectedException.none();
             exceptionRule.expect(CSVBuilderException.class);
-            iplAnalyser.loadIPLAnalserData(IPL_EMPTY_FILE_PATH);
+            iplAnalyser.loadIPLMostRunsAnalserData(IPL_EMPTY_FILE_PATH);
         }
         catch (CSVBuilderException e)
         {
@@ -63,7 +64,7 @@ public class IPLAnalyserTest
     {
         try
         {
-            int result=iplAnalyser.loadIPLAnalserData(IPL_FILE_PATH);
+            int result=iplAnalyser.loadIPLMostRunsAnalserData(IPL_MOST_RUNS_FILE_PATH);
             Assert.assertEquals(100,result);
         }
         catch (CSVBuilderException e)
@@ -78,7 +79,7 @@ public class IPLAnalyserTest
         {
             ExpectedException exceptionRule = ExpectedException.none();
             exceptionRule.expect(CSVBuilderException.class);
-            iplAnalyser.loadIPLAnalserData(IPL_WRONG_FILE_PATH);
+            iplAnalyser.loadIPLMostRunsAnalserData(IPL_WRONG_FILE_PATH);
         }
         catch (CSVBuilderException e)
         {
@@ -93,7 +94,7 @@ public class IPLAnalyserTest
         {
             ExpectedException exceptionRule = ExpectedException.none();
             exceptionRule.expect(CSVBuilderException.class);
-            iplAnalyser.loadIPLAnalserData(" ");
+            iplAnalyser.loadIPLMostRunsAnalserData(" ");
         }
         catch (CSVBuilderException e)
         {
@@ -108,7 +109,7 @@ public class IPLAnalyserTest
         {
             ExpectedException exceptionRule = ExpectedException.none();
             exceptionRule.expect(CSVBuilderException.class);
-            iplAnalyser.loadIPLAnalserData(WRONG_IPL_FILE_TYPE);
+            iplAnalyser.loadIPLMostRunsAnalserData(WRONG_IPL_FILE_TYPE);
         }
         catch (CSVBuilderException e)
         {
@@ -123,7 +124,7 @@ public class IPLAnalyserTest
         {
             ExpectedException exceptionRule=ExpectedException.none();
             exceptionRule.expect(CSVBuilderException.class);
-            iplAnalyser.loadIPLAnalserData(WRONG_IPL_FILE_TYPE);
+            iplAnalyser.loadIPLMostRunsAnalserData(WRONG_IPL_FILE_TYPE);
         }
         catch (CSVBuilderException e)
         {
@@ -138,7 +139,7 @@ public class IPLAnalyserTest
         {
             ExpectedException exceptionRule=ExpectedException.none();
             exceptionRule.expect(CSVBuilderException.class);
-            iplAnalyser.loadIPLAnalserData(WRONG_IPL_FILE_TYPE);
+            iplAnalyser.loadIPLMostRunsAnalserData(WRONG_IPL_FILE_TYPE);
         }
         catch (CSVBuilderException e)
         {
@@ -153,7 +154,7 @@ public class IPLAnalyserTest
         {
             ExpectedException exceptionRule=ExpectedException.none();
             exceptionRule.expect(CSVBuilderException.class);
-            iplAnalyser.loadIPLAnalserData(WRONG_IPL_FILE_TYPE);
+            iplAnalyser.loadIPLMostRunsAnalserData(WRONG_IPL_FILE_TYPE);
         }
         catch (CSVBuilderException e)
         {
@@ -166,7 +167,7 @@ public class IPLAnalyserTest
     {
         try
         {
-            iplAnalyser.loadIPLAnalserData(IPL_FILE_PATH);
+            iplAnalyser.loadIPLMostRunsAnalserData(IPL_MOST_RUNS_FILE_PATH);
             String sortedData = iplAnalyser.getSortByField(SortByBasedOnField.Average);
             IPLMostRunsData[] censusCSV = new Gson().fromJson(sortedData, IPLMostRunsData[].class);
             Assert.assertEquals("MS Dhoni", censusCSV[0].player);
@@ -182,7 +183,7 @@ public class IPLAnalyserTest
     {
         try
         {
-            iplAnalyser.loadIPLAnalserData(IPL_FILE_PATH);
+            iplAnalyser.loadIPLMostRunsAnalserData(IPL_MOST_RUNS_FILE_PATH);
             String sortedData = iplAnalyser.getSortByField(SortByBasedOnField.Strike_Rate);
             IPLMostRunsData[] censusCSV = new Gson().fromJson(sortedData, IPLMostRunsData[].class);
             Assert.assertEquals("Ishant Sharma", censusCSV[0].player);
@@ -198,7 +199,7 @@ public class IPLAnalyserTest
     {
         try
         {
-            iplAnalyser.loadIPLAnalserData(IPL_FILE_PATH);
+            iplAnalyser.loadIPLMostRunsAnalserData(IPL_MOST_RUNS_FILE_PATH);
             String sortedData = iplAnalyser.getSortByField(SortByBasedOnField.Result_Of_Fours_Sixes);
             IPLMostRunsData[] censusCSV = new Gson().fromJson(sortedData, IPLMostRunsData[].class);
             Assert.assertEquals("Andre Russell", censusCSV[0].player);
@@ -214,7 +215,7 @@ public class IPLAnalyserTest
     {
         try
         {
-            iplAnalyser.loadIPLAnalserData(IPL_FILE_PATH);
+            iplAnalyser.loadIPLMostRunsAnalserData(IPL_MOST_RUNS_FILE_PATH);
             String sortedData = iplAnalyser.getSortByField(SortByBasedOnField.Strike_Rate_With_SixesWithFours);
             IPLMostRunsData[] censusCSV = new Gson().fromJson(sortedData, IPLMostRunsData[].class);
             Assert.assertEquals("Andre Russell", censusCSV[0].player);
@@ -230,7 +231,7 @@ public class IPLAnalyserTest
     {
         try
         {
-            iplAnalyser.loadIPLAnalserData(IPL_FILE_PATH);
+            iplAnalyser.loadIPLMostRunsAnalserData(IPL_MOST_RUNS_FILE_PATH);
             String sortedData = iplAnalyser.getSortByField(SortByBasedOnField.Great_Average_With_Strike_Rate);
             IPLMostRunsData[] censusCSV = new Gson().fromJson(sortedData, IPLMostRunsData[].class);
             Assert.assertEquals("MS Dhoni", censusCSV[0].player);
@@ -246,7 +247,7 @@ public class IPLAnalyserTest
     {
         try
         {
-            iplAnalyser.loadIPLAnalserData(IPL_FILE_PATH);
+            iplAnalyser.loadIPLMostRunsAnalserData(IPL_MOST_RUNS_FILE_PATH);
             String sortedData = iplAnalyser.getSortByField(SortByBasedOnField.Maximum_Runs_With_Average);
             IPLMostRunsData[] censusCSV = new Gson().fromJson(sortedData, IPLMostRunsData[].class);
             Assert.assertEquals("David Warner ", censusCSV[0].player);
@@ -255,5 +256,12 @@ public class IPLAnalyserTest
         {
             Assert.assertEquals(CSVBuilderException.ExceptionType.IPL_FILE_PROBLEM, e.type);
         }
+    }
+
+    @Test
+    public void givenIPLMostWicketsData_CheckFileIsPresentOrNot_ShouldReturnTrueOrFalse()
+    {
+        boolean result = iplAnalyser.checkIPLDataFile(IPL_MOST_WKTS_FILE_PATH);
+        Assert.assertEquals(true,result);
     }
 }
