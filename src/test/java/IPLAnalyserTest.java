@@ -279,4 +279,10 @@ public class IPLAnalyserTest
         Assert.assertEquals(true,result);
     }
 
+    @Test
+    public void givenIPLMostWicketsData_CheckFileIsHiddenOrNot_ShouldReturnTrueOrFalse()
+    {
+        boolean result = iplAnalyser.checkIPLMostRunsDataFileIsHidden(IPL_MOST_WKTS_FILE_PATH);
+        Assert.assertEquals(false,result);
+    }
 }
