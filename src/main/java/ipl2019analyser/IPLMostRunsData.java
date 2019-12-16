@@ -1,5 +1,4 @@
 package ipl2019analyser;
-
 import com.opencsv.bean.CsvBindByName;
 
 public class IPLMostRunsData
@@ -29,15 +28,15 @@ public class IPLMostRunsData
     @CsvBindByName(column = "50")
     public int  fifty;
     @CsvBindByName(column = "4s")
-    public int fours;
+    public int numberOfFours;
     @CsvBindByName(column = "6s")
-    public int  sixes;
+    public int  numberOfSixes;
 
     public IPLMostRunsData()
     {
     }
 
-    public IPLMostRunsData(int pos, String player, int mat, int inns, int no, int runs, String hs, double avg, int bf, double sr, int hundred, int fifty, int fours, int sixes)
+    public IPLMostRunsData(int pos, String player, int mat, int inns, int no, int runs, String hs, double avg, int bf, double sr, int hundred, int fifty, int numberOfFours, int numberOfSixes)
     {
         this.pos = pos;
         this.player = player;
@@ -51,9 +50,7 @@ public class IPLMostRunsData
         this.sr = sr;
         this.hundred = hundred;
         this.fifty = fifty;
-        this.fours = fours;
-        this.sixes = sixes;
+        this.numberOfFours = numberOfFours;
+        this.numberOfSixes = numberOfSixes;
     }
-
-
 }

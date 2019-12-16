@@ -7,8 +7,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import java.util.List;
-
 public class IPLAnalyserTest
 {
     private static final String IPL_FILE_PATH="/home/admin1/Desktop/IPL2019Analyser/src/test/resources/IPL2019FactsheetMostRuns.csv";
@@ -20,7 +18,7 @@ public class IPLAnalyserTest
     @Test
     public void givenIPLMostRunsData_CheckFileIsPresentOrNot_ShouldReturnTrueOrFalse()
     {
-            boolean result = iplAnalyser.CheckIPLDataFile(IPL_FILE_PATH);
+            boolean result = iplAnalyser.checkIPLDataFile(IPL_FILE_PATH);
             Assert.assertEquals(true,result);
     }
 
@@ -44,6 +42,7 @@ public class IPLAnalyserTest
         boolean result=iplAnalyser.checkIPLMostRunsDataFileIsHidden(IPL_FILE_PATH);
         Assert.assertEquals(false,result);
     }
+
     @Test
     public void givenIPLMostRunsData_WhenFileIsEmpty_ShouldThrowException()
     {
@@ -168,7 +167,7 @@ public class IPLAnalyserTest
         try
         {
             iplAnalyser.loadIPLAnalserData(IPL_FILE_PATH);
-            String sortedData = iplAnalyser.getSortByTopAverage(SortByBasedOnField.Average);
+            String sortedData = iplAnalyser.getSortByField(SortByBasedOnField.Average);
             IPLMostRunsData[] censusCSV = new Gson().fromJson(sortedData, IPLMostRunsData[].class);
             Assert.assertEquals("MS Dhoni", censusCSV[0].player);
         }
@@ -184,9 +183,25 @@ public class IPLAnalyserTest
         try
         {
             iplAnalyser.loadIPLAnalserData(IPL_FILE_PATH);
-            String sortedData = iplAnalyser.getSortByTopAverage(SortByBasedOnField.Strike_Rate);
+            String sortedData = iplAnalyser.getSortByField(SortByBasedOnField.Strike_Rate);
             IPLMostRunsData[] censusCSV = new Gson().fromJson(sortedData, IPLMostRunsData[].class);
             Assert.assertEquals("Ishant Sharma", censusCSV[0].player);
+        }
+        catch (CSVBuilderException e)
+        {
+            Assert.assertEquals(CSVBuilderException.ExceptionType.IPL_FILE_PROBLEM, e.type);
+        }
+    }
+
+    @Test
+    public void givenUSCensusData_WhenSortedOnFoursAndSixes_ShouldReturnSortedResult()
+    {
+        try
+        {
+            iplAnalyser.loadIPLAnalserData(IPL_FILE_PATH);
+            String sortedData = iplAnalyser.getSortByField(SortByBasedOnField.Result_Of_Fours_Sixes);
+            IPLMostRunsData[] censusCSV = new Gson().fromJson(sortedData, IPLMostRunsData[].class);
+            Assert.assertEquals("Andre Russell", censusCSV[0].player);
         }
         catch (CSVBuilderException e)
         {

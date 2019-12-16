@@ -14,8 +14,8 @@ public class IPLRunsDAO
     public double  sr;
     public int hundred;
     public int  fifty;
-    public int fours;
-    public int  sixes;
+    public int numberOfFours;
+    public int numberOfSixes;
 
     public IPLRunsDAO(IPLMostRunsData iplMostRunsData)
     {
@@ -31,8 +31,7 @@ public class IPLRunsDAO
         sr=iplMostRunsData.sr;
         hundred=iplMostRunsData.hundred;
         fifty=iplMostRunsData.fifty;
-        fours=iplMostRunsData.fours;
-        sixes=iplMostRunsData.sixes;
+        numberOfFours=iplMostRunsData.numberOfFours;
+        numberOfSixes=iplMostRunsData.numberOfSixes;
     }
-
 }

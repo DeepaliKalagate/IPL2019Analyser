@@ -2,23 +2,20 @@ package ipl2019analyser;
 import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
+import java.lang.reflect.Field;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
-import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 import com.bridgelabz.CSVBuilderException;
 import com.bridgelabz.CSVBuilderFactory;
 import com.bridgelabz.ICVBuilder;
 import com.google.gson.Gson;
-
 import static java.util.stream.Collectors.toCollection;
-
 
 public class IPLAnalyser
 {
     Map<String,IPLRunsDAO> daoMap=new HashMap<>();
-    List<IPLRunsDAO> list=null;
     Map<SortByBasedOnField,Comparator<IPLRunsDAO>> fieldComparatorMap=null;
 
     public IPLAnalyser()
@@ -26,9 +23,10 @@ public class IPLAnalyser
         fieldComparatorMap=new HashMap<>();
         this.fieldComparatorMap.put(SortByBasedOnField.Average,Comparator.comparing(field->field.avg,Comparator.reverseOrder()));
         this.fieldComparatorMap.put(SortByBasedOnField.Strike_Rate,Comparator.comparing(field->field.sr,Comparator.reverseOrder()));
+        this.fieldComparatorMap.put(SortByBasedOnField.Result_Of_Fours_Sixes,new SortByFoursWithSixes().reversed());
     }
 
-    public boolean CheckIPLDataFile(String iplFilePath)
+    public boolean checkIPLDataFile(String iplFilePath)
     {
         File file = new File(iplFilePath);
         if (file.exists())
@@ -82,7 +80,7 @@ public class IPLAnalyser
         }
     }
 
-    public String getSortByTopAverage(SortByBasedOnField fieldName) throws CSVBuilderException
+    public String getSortByField(SortByBasedOnField fieldName) throws CSVBuilderException
     {
         if (daoMap == null || daoMap.size() == 0)
         {
