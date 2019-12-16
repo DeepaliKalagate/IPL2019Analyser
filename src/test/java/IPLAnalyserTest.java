@@ -224,4 +224,20 @@ public class IPLAnalyserTest
             Assert.assertEquals(CSVBuilderException.ExceptionType.IPL_FILE_PROBLEM, e.type);
         }
     }
+
+    @Test
+    public void givenUSCensusData_WhenSortedOnGreatAverageWithStrikeRate_ShouldReturnSortedResult()
+    {
+        try
+        {
+            iplAnalyser.loadIPLAnalserData(IPL_FILE_PATH);
+            String sortedData = iplAnalyser.getSortByField(SortByBasedOnField.Great_Average_With_Strike_Rate);
+            IPLMostRunsData[] censusCSV = new Gson().fromJson(sortedData, IPLMostRunsData[].class);
+            Assert.assertEquals("MS Dhoni", censusCSV[0].player);
+        }
+        catch (CSVBuilderException e)
+        {
+            Assert.assertEquals(CSVBuilderException.ExceptionType.IPL_FILE_PROBLEM, e.type);
+        }
+    }
 }

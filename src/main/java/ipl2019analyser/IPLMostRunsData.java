@@ -22,7 +22,7 @@ public class IPLMostRunsData
     @CsvBindByName(column = "BF")
     public int bf;
     @CsvBindByName(column = "SR")
-    public double  sr;
+    public double strikeRate;
     @CsvBindByName(column = "100")
     public int hundred;
     @CsvBindByName(column = "50")
@@ -36,7 +36,7 @@ public class IPLMostRunsData
     {
     }
 
-    public IPLMostRunsData(int pos, String player, int mat, int inns, int no, int runs, String hs, double avg, int bf, double sr, int hundred, int fifty, int numberOfFours, int numberOfSixes)
+    public IPLMostRunsData(int pos, String player, int mat, int inns, int no, int runs, String hs, double avg, int bf, double strikeRate, int hundred, int fifty, int numberOfFours, int numberOfSixes)
     {
         this.pos = pos;
         this.player = player;
@@ -47,7 +47,7 @@ public class IPLMostRunsData
         this.hs = hs;
         this.avg = avg;
         this.bf = bf;
-        this.sr = sr;
+        this.strikeRate = strikeRate;
         this.hundred = hundred;
         this.fifty = fifty;
         this.numberOfFours = numberOfFours;

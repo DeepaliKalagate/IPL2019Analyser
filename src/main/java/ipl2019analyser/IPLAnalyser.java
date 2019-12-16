@@ -21,10 +21,14 @@ public class IPLAnalyser
     {
         fieldComparatorMap=new HashMap<>();
         this.fieldComparatorMap.put(SortByBasedOnField.Average,Comparator.comparing(field->field.avg,Comparator.reverseOrder()));
-        this.fieldComparatorMap.put(SortByBasedOnField.Strike_Rate,Comparator.comparing(field->field.sr,Comparator.reverseOrder()));
+        this.fieldComparatorMap.put(SortByBasedOnField.Strike_Rate,Comparator.comparing(field->field.strikeRate,Comparator.reverseOrder()));
         this.fieldComparatorMap.put(SortByBasedOnField.Result_Of_Fours_Sixes,new SortByFoursWithSixes().reversed());
         this.fieldComparatorMap.put(SortByBasedOnField.Strike_Rate_With_SixesWithFours,new SortByFoursWithSixes().reversed()
-                                    .thenComparing(field->field.sr));
+                                    .thenComparing(field->field.strikeRate));
+        Comparator<IPLRunsDAO> average=Comparator.comparing(field->field.avg);
+        Comparator<IPLRunsDAO> strikeRate=Comparator.comparing(field->field.strikeRate);
+        Comparator<IPLRunsDAO> result=average.thenComparing(strikeRate);
+        this.fieldComparatorMap.put(SortByBasedOnField.Great_Average_With_Strike_Rate,result.reversed());
     }
 
     public boolean checkIPLDataFile(String iplFilePath)

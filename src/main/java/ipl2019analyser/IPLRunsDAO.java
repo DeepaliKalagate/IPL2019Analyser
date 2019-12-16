@@ -11,7 +11,7 @@ public class IPLRunsDAO
     public String hs;
     public double avg;
     public int bf;
-    public double  sr;
+    public double strikeRate;
     public int hundred;
     public int  fifty;
     public int numberOfFours;
@@ -28,7 +28,7 @@ public class IPLRunsDAO
         hs=iplMostRunsData.hs;
         avg=iplMostRunsData.avg;
         bf=iplMostRunsData.bf;
-        sr=iplMostRunsData.sr;
+        strikeRate =iplMostRunsData.strikeRate;
         hundred=iplMostRunsData.hundred;
         fifty=iplMostRunsData.fifty;
         numberOfFours=iplMostRunsData.numberOfFours;
