@@ -13,7 +13,7 @@ public class IPLMostWicketsData
     @CsvBindByName(column = "Inns")
     public int  innings;
     @CsvBindByName(column = "Ov")
-    public int over;
+    public double over;
     @CsvBindByName(column = "Runs")
     public int  runs;
     @CsvBindByName(column = "Wkts")
@@ -23,7 +23,7 @@ public class IPLMostWicketsData
     @CsvBindByName(column = "Avg")
     public double  avg;
     @CsvBindByName(column = "Econ")
-    public int econ;
+    public double econ;
     @CsvBindByName(column = "SR")
     public double strikeRate;
     @CsvBindByName(column = "4w")
@@ -35,7 +35,7 @@ public class IPLMostWicketsData
     {
     }
 
-    public IPLMostWicketsData(int position, String player, int matches, int innings, int over, int runs, String wickets, int bbi, double avg, int econ, double strikeRate, int numberOfFourWkts, int numberOfFiveWkts)
+    public IPLMostWicketsData(int position, String player, int matches, int innings, double over, int runs, String wickets, int bbi, double avg, double econ, double strikeRate, int numberOfFourWkts, int numberOfFiveWkts)
     {
         this.position = position;
         this.player = player;

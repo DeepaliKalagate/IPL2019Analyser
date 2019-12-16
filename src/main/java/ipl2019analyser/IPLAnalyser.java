@@ -89,14 +89,14 @@ public class IPLAnalyser
         }
     }
 
-    public int loadIPLMostWktsAnalserData(String iplFilePath) throws CSVBuilderException
+    public int loadIPLMostWicketsAnalyserData(String iplFilePath) throws CSVBuilderException
     {
         try (Reader reader = Files.newBufferedReader(Paths.get(iplFilePath));)
         {
-            ICVBuilder icsvBuilder = CSVBuilderFactory.createCSVBuilder();
-            Iterator<IPLMostWicketsData> iterator = icsvBuilder.getCSVFileIterator(reader, IPLMostWicketsData.class);
-            Iterable<IPLMostWicketsData> csvIterable=()->iterator;
-            StreamSupport.stream(csvIterable.spliterator(), false)
+            ICVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
+            Iterator<IPLMostWicketsData> csvFileIterator = csvBuilder.getCSVFileIterator(reader, IPLMostWicketsData.class);
+            Iterable<IPLMostWicketsData> dataIterable=()->csvFileIterator;
+            StreamSupport.stream(dataIterable.spliterator(), false)
                     .map(IPLMostWicketsData.class::cast)
                     .forEach(field -> daoMap1.put(field.player, new IPLWicketsDAO(field)));
             return daoMap1.size();

@@ -6,12 +6,12 @@ public class IPLWicketsDAO
     public String  player;
     public int matches;
     public int  innings;
-    public int over;
+    public double over;
     public int  runs;
     public String wickets;
     public int bbi;
     public double  avg;
-    public int econ;
+    public double econ;
     public double strikeRate;
     public int numberOfFourWkts;
     public int  numberOfFiveWkts;

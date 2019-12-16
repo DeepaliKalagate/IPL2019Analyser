@@ -294,7 +294,7 @@ public class IPLAnalyserTest
         {
             ExpectedException exceptionRule = ExpectedException.none();
             exceptionRule.expect(CSVBuilderException.class);
-            iplAnalyser.loadIPLMostWktsAnalserData(IPL_MOST_WKTS_EMPTY_FILE_PATH);
+            iplAnalyser.loadIPLMostWicketsAnalyserData(IPL_MOST_WKTS_EMPTY_FILE_PATH);
         }
         catch (CSVBuilderException e)
         {
@@ -302,4 +302,16 @@ public class IPLAnalyserTest
         }
     }
 
+    @Test
+    public void givenIPLMostWicketsData_CheckRecords_ShouldReturnExactCount()
+    {
+        try
+        {
+            int result=iplAnalyser.loadIPLMostWicketsAnalyserData(IPL_MOST_WKTS_FILE_PATH);
+            Assert.assertEquals(99,result);
+        }
+        catch (CSVBuilderException e)
+        {
+        }
+    }
 }
