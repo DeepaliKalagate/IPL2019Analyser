@@ -52,6 +52,14 @@ public class IPLAnalyser
         return false;
     }
 
+    public boolean checkIPLMostRunsDataFileIsHidden(String iplFilePath)
+    {
+        File file=new File(iplFilePath);
+        if (file.isHidden())
+            return true;
+        return false;
+    }
+
     public int loadIPLAnalserData(String iplFilePath) throws CSVBuilderException
     {
         try (Reader reader = Files.newBufferedReader(Paths.get(iplFilePath));)

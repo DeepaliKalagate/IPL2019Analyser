@@ -39,6 +39,12 @@ public class IPLAnalyserTest
     }
 
     @Test
+    public void gievnIPLMostRunsDataFile_CheckFileIsHiddenOrNot_IfValidShouldReturnTrueOrFalse()
+    {
+        boolean result=iplAnalyser.checkIPLMostRunsDataFileIsHidden(IPL_FILE_PATH);
+        Assert.assertEquals(false,result);
+    }
+    @Test
     public void givenIPLMostRunsData_WhenFileIsEmpty_ShouldThrowException()
     {
         try
