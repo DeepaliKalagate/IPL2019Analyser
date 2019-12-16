@@ -391,4 +391,20 @@ public class IPLAnalyserTest
             Assert.assertEquals(CSVBuilderException.ExceptionType.IPL_FILE_PROBLEM,e.type);
         }
     }
+
+    @Test
+    public void givenIPLMostWicketsData_MissingHeader_ShouldReturnException()
+    {
+        try
+        {
+            ExpectedException exceptionRule=ExpectedException.none();
+            exceptionRule.expect(CSVBuilderException.class);
+            iplAnalyser.loadIPLMostRunsAnalserData(WRONG_IPL_MOST_WICKETS_FILE_TYPE);
+        }
+        catch (CSVBuilderException e)
+        {
+            Assert.assertEquals(CSVBuilderException.ExceptionType.IPL_FILE_PROBLEM,e.type);
+        }
+    }
+
 }
