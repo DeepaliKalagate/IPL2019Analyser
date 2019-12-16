@@ -25,6 +25,13 @@ public class IPLAnalyserTest
     }
 
     @Test
+    public void givenIPLMostRunsData_CheckFileIsEmptyOrNot_IfValidShouldReturnTrueOrFalse()
+    {
+        boolean result=iplAnalyser.CheckIPLDataFileIsEmptyOrNot(IPL_FILE_PATH);
+        Assert.assertEquals(false,result);
+    }
+
+    @Test
     public void givenIPLMostRunsData_WhenFileIsEmpty_ShouldThrowException()
     {
         try
