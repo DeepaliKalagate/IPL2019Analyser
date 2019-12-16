@@ -14,6 +14,7 @@ public class IPLAnalyserTest
     private static final String IPL_EMPTY_FILE_PATH="/home/admin1/Desktop/IPL2019Analyser/src/test/resources/IPL2019MostRuns.csv";
     private static final String IPL_WRONG_FILE_PATH = "./src/main/resources/IndiaStateCensusData.csv";
     private static final String WRONG_IPL_FILE_TYPE="/home/admin1/Desktop/CensusAnalyser/src/test/resources/IPL2019MostRunsFile11.csv";
+    private static final String IPL_MOST_WKTS_EMPTY_FILE_PATH="/home/admin1/Desktop/IPL2019Analyser/src/test/resources/IPL2019MostWickets.csv";
     IPLAnalyser iplAnalyser=new IPLAnalyser();
 
     @Test
@@ -285,4 +286,20 @@ public class IPLAnalyserTest
         boolean result = iplAnalyser.checkIPLMostRunsDataFileIsHidden(IPL_MOST_WKTS_FILE_PATH);
         Assert.assertEquals(false,result);
     }
+
+    @Test
+    public void givenIPLMostWicketsData_WhenFileIsEmpty_ShouldThrowException()
+    {
+        try
+        {
+            ExpectedException exceptionRule = ExpectedException.none();
+            exceptionRule.expect(CSVBuilderException.class);
+            iplAnalyser.loadIPLMostWktsAnalserData(IPL_MOST_WKTS_EMPTY_FILE_PATH);
+        }
+        catch (CSVBuilderException e)
+        {
+            Assert.assertEquals(CSVBuilderException.ExceptionType.UNABLE_TO_PARSE, e.type);
+        }
+    }
+
 }

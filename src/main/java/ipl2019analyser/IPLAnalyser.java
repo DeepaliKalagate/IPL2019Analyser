@@ -15,6 +15,7 @@ import static java.util.stream.Collectors.toCollection;
 public class IPLAnalyser
 {
     Map<String,IPLRunsDAO> daoMap=new HashMap<>();
+    Map<String, IPLWicketsDAO> daoMap1=new HashMap<>();
     Map<SortByBasedOnField,Comparator<IPLRunsDAO>> fieldComparatorMap=null;
 
     public IPLAnalyser()
@@ -77,6 +78,28 @@ public class IPLAnalyser
                     .map(IPLMostRunsData.class::cast)
                     .forEach(field -> daoMap.put(field.player, new IPLRunsDAO(field)));
             return daoMap.size();
+        }
+        catch (IOException | RuntimeException e)
+        {
+            throw new CSVBuilderException(e.getMessage(), CSVBuilderException.ExceptionType.IPL_FILE_PROBLEM);
+        }
+        catch (CSVBuilderException e)
+        {
+            throw new CSVBuilderException(e.getMessage(), CSVBuilderException.ExceptionType.UNABLE_TO_PARSE);
+        }
+    }
+
+    public int loadIPLMostWktsAnalserData(String iplFilePath) throws CSVBuilderException
+    {
+        try (Reader reader = Files.newBufferedReader(Paths.get(iplFilePath));)
+        {
+            ICVBuilder icsvBuilder = CSVBuilderFactory.createCSVBuilder();
+            Iterator<IPLMostWicketsData> iterator = icsvBuilder.getCSVFileIterator(reader, IPLMostWicketsData.class);
+            Iterable<IPLMostWicketsData> csvIterable=()->iterator;
+            StreamSupport.stream(csvIterable.spliterator(), false)
+                    .map(IPLMostWicketsData.class::cast)
+                    .forEach(field -> daoMap1.put(field.player, new IPLWicketsDAO(field)));
+            return daoMap1.size();
         }
         catch (IOException | RuntimeException e)
         {
