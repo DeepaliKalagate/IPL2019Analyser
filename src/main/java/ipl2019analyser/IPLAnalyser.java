@@ -2,7 +2,6 @@ package ipl2019analyser;
 import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
-import java.lang.reflect.Field;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
@@ -24,6 +23,8 @@ public class IPLAnalyser
         this.fieldComparatorMap.put(SortByBasedOnField.Average,Comparator.comparing(field->field.avg,Comparator.reverseOrder()));
         this.fieldComparatorMap.put(SortByBasedOnField.Strike_Rate,Comparator.comparing(field->field.sr,Comparator.reverseOrder()));
         this.fieldComparatorMap.put(SortByBasedOnField.Result_Of_Fours_Sixes,new SortByFoursWithSixes().reversed());
+        this.fieldComparatorMap.put(SortByBasedOnField.Strike_Rate_With_SixesWithFours,new SortByFoursWithSixes().reversed()
+                                    .thenComparing(field->field.sr));
     }
 
     public boolean checkIPLDataFile(String iplFilePath)
