@@ -271,4 +271,12 @@ public class IPLAnalyserTest
         boolean result = iplAnalyser.checkIPLDataFileIsEmptyOrNot(IPL_MOST_WKTS_FILE_PATH);
         Assert.assertEquals(false,result);
     }
+
+    @Test
+    public void givenIPLMostWicketsData_CheckFileCanReadOrNot_ShouldReturnTrueOrFalse()
+    {
+        boolean result = iplAnalyser.checkIPLMostRunsDataFileCanRead(IPL_MOST_WKTS_FILE_PATH);
+        Assert.assertEquals(true,result);
+    }
+
 }
