@@ -12,7 +12,8 @@ public class IPLAnalyserTest
     private static final String IPL_MOST_RUNS_FILE_PATH ="/home/admin1/Desktop/IPL2019Analyser/src/test/resources/IPL2019FactsheetMostRuns.csv";
     private static final String IPL_MOST_WKTS_FILE_PATH="/home/admin1/Desktop/IPL2019Analyser/src/test/resources/IPL2019FactsheetMostWkts.csv";
     private static final String IPL_EMPTY_FILE_PATH="/home/admin1/Desktop/IPL2019Analyser/src/test/resources/IPL2019MostRuns.csv";
-    private static final String IPL_WRONG_FILE_PATH = "./src/main/resources/IndiaStateCensusData.csv";
+    private static final String IPL_WRONG_FILE_PATH = "./src/main/resources/IPL2019FactsheetMostRuns.csv";
+    private static final String IPL__WKTS_WRONG_FILE_PATH = "./src/main/resources/IPL2019FactsheetMostWkts.csv";
     private static final String WRONG_IPL_FILE_TYPE="/home/admin1/Desktop/CensusAnalyser/src/test/resources/IPL2019MostRunsFile11.csv";
     private static final String IPL_MOST_WKTS_EMPTY_FILE_PATH="/home/admin1/Desktop/IPL2019Analyser/src/test/resources/IPL2019MostWickets.csv";
     IPLAnalyser iplAnalyser=new IPLAnalyser();
@@ -312,6 +313,21 @@ public class IPLAnalyserTest
         }
         catch (CSVBuilderException e)
         {
+        }
+    }
+
+    @Test
+    public void givenIPLMostWicketsData_IfNoFilePath_ShouldThrowException()
+    {
+        try
+        {
+            ExpectedException exceptionRule = ExpectedException.none();
+            exceptionRule.expect(CSVBuilderException.class);
+            iplAnalyser.loadIPLMostWicketsAnalyserData(" ");
+        }
+        catch (CSVBuilderException e)
+        {
+            Assert.assertEquals(CSVBuilderException.ExceptionType.IPL_FILE_PROBLEM, e.type);
         }
     }
 }
