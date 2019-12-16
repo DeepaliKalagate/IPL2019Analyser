@@ -330,4 +330,19 @@ public class IPLAnalyserTest
             Assert.assertEquals(CSVBuilderException.ExceptionType.IPL_FILE_PROBLEM, e.type);
         }
     }
+
+    @Test
+    public void givenIPLMostWicketsData_CheckFilePath_IfValid_ShouldThrowException()
+    {
+        try
+        {
+            ExpectedException exceptionRule = ExpectedException.none();
+            exceptionRule.expect(CSVBuilderException.class);
+            iplAnalyser.loadIPLMostWicketsAnalyserData(IPL__WKTS_WRONG_FILE_PATH);
+        }
+        catch (CSVBuilderException e)
+        {
+            Assert.assertEquals(CSVBuilderException.ExceptionType.IPL_FILE_PROBLEM, e.type);
+        }
+    }
 }
