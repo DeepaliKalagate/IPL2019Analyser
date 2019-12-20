@@ -45,6 +45,7 @@ public abstract class IPLAdapter
                         .map(IPLMostWicketsData.class::cast)
                         .forEach(iplPlayer -> playerDAOMap.put(iplPlayer.player, new IPLPlayerDAO(iplPlayer)));
             }
+            return playerDAOMap;
         }
         catch (IOException | RuntimeException e)
         {
@@ -54,6 +55,5 @@ public abstract class IPLAdapter
         {
             throw new CSVBuilderException("Unable to Build Bean", CSVBuilderException.ExceptionType.UNABLE_TO_PARSE);
         }
-        return playerDAOMap;
     }
 }
