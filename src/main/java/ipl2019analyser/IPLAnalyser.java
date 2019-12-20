@@ -21,8 +21,8 @@ public class IPLAnalyser
         comparatorMap =new HashMap<>();
         this.comparatorMap.put(SortByBasedOnField.Average,Comparator.comparing(field->field.average,Comparator.reverseOrder()));
         this.comparatorMap.put(SortByBasedOnField.Strike_Rate,Comparator.comparing(field->field.strikeRate,Comparator.reverseOrder()));
-        this.comparatorMap.put(SortByBasedOnField.Result_Of_Fours_Sixes,new calculateRuns().reversed());
-        this.comparatorMap.put(SortByBasedOnField.Strike_Rate_With_SixesWithFours,new calculateRuns().reversed()
+        this.comparatorMap.put(SortByBasedOnField.Result_Of_Fours_Sixes,new CalculateRuns().reversed());
+        this.comparatorMap.put(SortByBasedOnField.Strike_Rate_With_SixesWithFours,new CalculateRuns().reversed()
                                     .thenComparing(field->field.strikeRate));
         Comparator<IPLPlayerDAO> average=Comparator.comparing(field->field.average);
         Comparator<IPLPlayerDAO> strikeRate=Comparator.comparing(field->field.strikeRate);
@@ -33,6 +33,9 @@ public class IPLAnalyser
         Comparator<IPLPlayerDAO> runsWithAverage=maximumRuns.thenComparing(average);
         this.comparatorMap.put(SortByBasedOnField.Maximum_Runs_With_Average,runsWithAverage.reversed());
         this.comparatorMap.put(SortByBasedOnField.Economy_Rate,Comparator.comparing(field->field.economyRate,Comparator.reverseOrder()));
+        this.comparatorMap.put(SortByBasedOnField.Result_Of_Five_Four_Wickets,new CalculateWickets().reversed());
+        this.comparatorMap.put(SortByBasedOnField.Strike_Rate_Wth_Four_Five_Wickets,new CalculateWickets().reversed()
+                                    .thenComparing(field->field.strikeRate));
     }
     public boolean checkIPLDataFile(String iplFilePath)
     {

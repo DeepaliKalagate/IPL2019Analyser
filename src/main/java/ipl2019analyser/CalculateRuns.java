@@ -1,7 +1,7 @@
 package ipl2019analyser;
 import java.util.Comparator;
 
-public class calculateRuns implements Comparator<IPLPlayerDAO>
+public class CalculateRuns implements Comparator<IPLPlayerDAO>
 {
     @Override
     public int compare(IPLPlayerDAO iplPlayerDAO1, IPLPlayerDAO iplPlayerDAO2)

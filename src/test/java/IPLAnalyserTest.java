@@ -302,6 +302,7 @@ public class IPLAnalyserTest
         {
         }
     }
+
     @Test
     public void givenIPLMostWicketsData_CheckRecords_SortDataBasedOnBowlingEconomyRate()
     {
@@ -311,6 +312,36 @@ public class IPLAnalyserTest
             String sortedData=iplAnalyser.getSortByField(SortByBasedOnField.Economy_Rate,daoMap);
             IPLMostWicketsData[] wicketsData=new Gson().fromJson(sortedData,IPLMostWicketsData[].class);
             Assert.assertEquals("Ben Cutting",wicketsData[0].player);
+        }
+        catch (CSVBuilderException e)
+        {
+        }
+    }
+
+    @Test
+    public void givenIPLMostWicketsData_CheckRecords_SortDataBasedOnBowling5Wicketsand4Wickets()
+    {
+        try
+        {
+            Map<String,IPLPlayerDAO> daoMap=iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.WICKETS,IPL_MOST_WKTS_FILE_PATH);
+            String sortedData=iplAnalyser.getSortByField(SortByBasedOnField.Result_Of_Five_Four_Wickets,daoMap);
+            IPLMostWicketsData[] wicketsData=new Gson().fromJson(sortedData,IPLMostWicketsData[].class);
+            Assert.assertEquals("Lasith Malinga",wicketsData[0].player);
+        }
+        catch (CSVBuilderException e)
+        {
+        }
+    }
+
+    @Test
+    public void givenIPLMostWicketsData_CheckRecords_SortDataBasedOnBowlingStrikeRateWith5Wicketsand4Wickets()
+    {
+        try
+        {
+            Map<String,IPLPlayerDAO> daoMap=iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.WICKETS,IPL_MOST_WKTS_FILE_PATH);
+            String sortedData=iplAnalyser.getSortByField(SortByBasedOnField.Strike_Rate_Wth_Four_Five_Wickets,daoMap);
+            IPLMostWicketsData[] wicketsData=new Gson().fromJson(sortedData,IPLMostWicketsData[].class);
+            Assert.assertEquals("Kagiso Rabada",wicketsData[0].player);
         }
         catch (CSVBuilderException e)
         {
