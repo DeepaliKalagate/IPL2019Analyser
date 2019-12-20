@@ -347,4 +347,19 @@ public class IPLAnalyserTest
         {
         }
     }
+
+    @Test
+    public void givenIPLMostWicketsData_CheckRecords_SortDataBasedOnBowlingAverageWithStrikeRate()
+    {
+        try
+        {
+            Map<String,IPLPlayerDAO> daoMap=iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.WICKETS,IPL_MOST_WKTS_FILE_PATH);
+            String sortedData=iplAnalyser.getSortByField(SortByBasedOnField.Great_Average_With_Strike_Rate,daoMap);
+            IPLMostWicketsData[] wicketsData=new Gson().fromJson(sortedData,IPLMostWicketsData[].class);
+            Assert.assertEquals("Krishnappa Gowtham",wicketsData[0].player);
+        }
+        catch (CSVBuilderException e)
+        {
+        }
+    }
 }
