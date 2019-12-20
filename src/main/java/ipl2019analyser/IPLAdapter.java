@@ -28,8 +28,8 @@ public abstract class IPLAdapter
         try (Reader reader = Files.newBufferedReader(Paths.get(iplFilePath)))
         {
             ICVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
-            Iterator<IPLMostRunsData> csvFileIterator = csvBuilder.getCSVFileIterator(reader, eClass);
-            Iterable<IPLMostRunsData> csvIterable = () -> csvFileIterator;
+            Iterator<E> csvFileIterator = csvBuilder.getCSVFileIterator(reader, eClass);
+            Iterable<E> csvIterable = () -> csvFileIterator;
 
             if (eClass.getName().equals("ipl2019analyser.IPLMostRunsData"))
             {
