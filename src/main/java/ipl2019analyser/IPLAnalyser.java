@@ -36,6 +36,10 @@ public class IPLAnalyser
         this.comparatorMap.put(SortByBasedOnField.Result_Of_Five_Four_Wickets,new CalculateWickets().reversed());
         this.comparatorMap.put(SortByBasedOnField.Strike_Rate_Wth_Four_Five_Wickets,new CalculateWickets().reversed()
                                     .thenComparing(field->field.strikeRate));
+        this.comparatorMap.put(SortByBasedOnField.Maximum_Wickets,Comparator.comparing(field->field.wickets,Comparator.reverseOrder()));
+        Comparator<IPLPlayerDAO> maximumWickets=Comparator.comparing(field->field.wickets);
+        Comparator<IPLPlayerDAO> wicketsWithAverage=maximumRuns.thenComparing(average);
+        this.comparatorMap.put(SortByBasedOnField.Maximum_Wickets_With_Average,runsWithAverage.reversed());
     }
     public boolean checkIPLDataFile(String iplFilePath)
     {

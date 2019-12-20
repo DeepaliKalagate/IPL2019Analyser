@@ -362,4 +362,34 @@ public class IPLAnalyserTest
         {
         }
     }
+
+    @Test
+    public void givenIPLMostWicketsData_CheckRecords_SortDataBasedOnBowlingWickets()
+    {
+        try
+        {
+            Map<String,IPLPlayerDAO> daoMap=iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.WICKETS,IPL_MOST_WKTS_FILE_PATH);
+            String sortedData=iplAnalyser.getSortByField(SortByBasedOnField.Maximum_Wickets,daoMap);
+            IPLMostWicketsData[] wicketsData=new Gson().fromJson(sortedData,IPLMostWicketsData[].class);
+            Assert.assertEquals("Keemo Paul",wicketsData[0].player);
+        }
+        catch (CSVBuilderException e)
+        {
+        }
+    }
+
+    @Test
+    public void givenIPLMostWicketsData_CheckRecords_SortDataBasedOnBowlingMaximumWicketsWithAverage()
+    {
+        try
+        {
+            Map<String,IPLPlayerDAO> daoMap=iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.WICKETS,IPL_MOST_WKTS_FILE_PATH);
+            String sortedData=iplAnalyser.getSortByField(SortByBasedOnField.Maximum_Wickets_With_Average,daoMap);
+            IPLMostWicketsData[] wicketsData=new Gson().fromJson(sortedData,IPLMostWicketsData[].class);
+            Assert.assertEquals("Deepak Chahar",wicketsData[0].player);
+        }
+        catch (CSVBuilderException e)
+        {
+        }
+    }
 }
