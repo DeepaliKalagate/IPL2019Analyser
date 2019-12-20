@@ -32,6 +32,7 @@ public class IPLAnalyser
         Comparator<IPLPlayerDAO> maximumRuns=Comparator.comparing(field->field.runs);
         Comparator<IPLPlayerDAO> runsWithAverage=maximumRuns.thenComparing(average);
         this.comparatorMap.put(SortByBasedOnField.Maximum_Runs_With_Average,runsWithAverage.reversed());
+        this.comparatorMap.put(SortByBasedOnField.Economy_Rate,Comparator.comparing(field->field.economyRate,Comparator.reverseOrder()));
     }
     public boolean checkIPLDataFile(String iplFilePath)
     {
