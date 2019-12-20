@@ -4,23 +4,23 @@ import com.opencsv.bean.CsvBindByName;
 public class IPLMostRunsData
 {
     @CsvBindByName(column = "POS")
-    public int pos;
+    public int position;
     @CsvBindByName(column = "PLAYER")
     public String  player;
     @CsvBindByName(column = "Mat")
-    public int mat;
+    public int matches;
     @CsvBindByName(column = "Inns")
-    public int  inns;
+    public int innings;
     @CsvBindByName(column = "NO")
-    public int no;
+    public int notOut;
     @CsvBindByName(column = "Runs")
     public int  runs;
     @CsvBindByName(column = "HS")
-    public String hs;
+    public String highestScore;
     @CsvBindByName(column = "Avg")
-    public double  avg;
+    public double average;
     @CsvBindByName(column = "BF")
-    public int bf;
+    public int ballsFaced;
     @CsvBindByName(column = "SR")
     public double strikeRate;
     @CsvBindByName(column = "100")
@@ -36,17 +36,17 @@ public class IPLMostRunsData
     {
     }
 
-    public IPLMostRunsData(int pos, String player, int mat, int inns, int no, int runs, String hs, double avg, int bf, double strikeRate, int hundred, int fifty, int numberOfFours, int numberOfSixes)
+    public IPLMostRunsData(int position, String player, int matches, int innings, int notOut, int runs, String highestScore, double average, int ballsFaced, double strikeRate, int hundred, int fifty, int numberOfFours, int numberOfSixes)
     {
-        this.pos = pos;
+        this.position = position;
         this.player = player;
-        this.mat = mat;
-        this.inns = inns;
-        this.no = no;
+        this.matches = matches;
+        this.innings = innings;
+        this.notOut = notOut;
         this.runs = runs;
-        this.hs = hs;
-        this.avg = avg;
-        this.bf = bf;
+        this.highestScore = highestScore;
+        this.average = average;
+        this.ballsFaced = ballsFaced;
         this.strikeRate = strikeRate;
         this.hundred = hundred;
         this.fifty = fifty;

@@ -1,14 +1,8 @@
 package ipl2019analyser;
 import java.io.File;
-import java.io.IOException;
-import java.io.Reader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.*;
-import java.util.stream.StreamSupport;
+
 import com.bridgelabz.CSVBuilderException;
-import com.bridgelabz.CSVBuilderFactory;
-import com.bridgelabz.ICVBuilder;
 import com.google.gson.Gson;
 import static java.util.stream.Collectors.toCollection;
 
@@ -18,15 +12,21 @@ public class IPLAnalyser
     Map<String, IPLWicketsDAO> daoMap1=new HashMap<>();
     Map<SortByBasedOnField,Comparator<IPLRunsDAO>> fieldComparatorMap=null;
 
+    public enum PlayerEnumTypes
+    {
+        RUNS,WICKETS
+    }
+    PlayerEnumTypes player;
+
     public IPLAnalyser()
     {
         fieldComparatorMap=new HashMap<>();
-        this.fieldComparatorMap.put(SortByBasedOnField.Average,Comparator.comparing(field->field.avg,Comparator.reverseOrder()));
+        this.fieldComparatorMap.put(SortByBasedOnField.Average,Comparator.comparing(field->field.average,Comparator.reverseOrder()));
         this.fieldComparatorMap.put(SortByBasedOnField.Strike_Rate,Comparator.comparing(field->field.strikeRate,Comparator.reverseOrder()));
-        this.fieldComparatorMap.put(SortByBasedOnField.Result_Of_Fours_Sixes,new SortByFoursWithSixes().reversed());
-        this.fieldComparatorMap.put(SortByBasedOnField.Strike_Rate_With_SixesWithFours,new SortByFoursWithSixes().reversed()
+        this.fieldComparatorMap.put(SortByBasedOnField.Result_Of_Fours_Sixes,new calculateRunsOfFoursWithSixes().reversed());
+        this.fieldComparatorMap.put(SortByBasedOnField.Strike_Rate_With_SixesWithFours,new calculateRunsOfFoursWithSixes().reversed()
                                     .thenComparing(field->field.strikeRate));
-        Comparator<IPLRunsDAO> average=Comparator.comparing(field->field.avg);
+        Comparator<IPLRunsDAO> average=Comparator.comparing(field->field.average);
         Comparator<IPLRunsDAO> strikeRate=Comparator.comparing(field->field.strikeRate);
         Comparator<IPLRunsDAO> result=average.thenComparing(strikeRate);
         this.fieldComparatorMap.put(SortByBasedOnField.Great_Average_With_Strike_Rate,result.reversed());
@@ -51,7 +51,7 @@ public class IPLAnalyser
         return false;
     }
 
-    public boolean checkIPLMostRunsDataFileCanRead(String iplFilePath)
+    public boolean checkIPLData(String iplFilePath)
     {
         File file=new File(iplFilePath);
         if (file.canRead())
@@ -67,48 +67,12 @@ public class IPLAnalyser
         return false;
     }
 
-    public int loadIPLMostRunsAnalserData(String iplFilePath) throws CSVBuilderException
+    public Map<String, IPLPlayerDAO> getIPLPlayerData(PlayerEnumTypes player, String iplFilePath) throws CSVBuilderException
     {
-        try (Reader reader = Files.newBufferedReader(Paths.get(iplFilePath));)
-        {
-            ICVBuilder icsvBuilder = CSVBuilderFactory.createCSVBuilder();
-            Iterator<IPLMostRunsData> iterator = icsvBuilder.getCSVFileIterator(reader, IPLMostRunsData.class);
-            Iterable<IPLMostRunsData> csvIterable=()->iterator;
-            StreamSupport.stream(csvIterable.spliterator(), false)
-                    .map(IPLMostRunsData.class::cast)
-                    .forEach(field -> daoMap.put(field.player, new IPLRunsDAO(field)));
-            return daoMap.size();
-        }
-        catch (IOException | RuntimeException e)
-        {
-            throw new CSVBuilderException(e.getMessage(), CSVBuilderException.ExceptionType.IPL_FILE_PROBLEM);
-        }
-        catch (CSVBuilderException e)
-        {
-            throw new CSVBuilderException(e.getMessage(), CSVBuilderException.ExceptionType.UNABLE_TO_PARSE);
-        }
-    }
-
-    public int loadIPLMostWicketsAnalyserData(String iplFilePath) throws CSVBuilderException
-    {
-        try (Reader reader = Files.newBufferedReader(Paths.get(iplFilePath));)
-        {
-            ICVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
-            Iterator<IPLMostWicketsData> csvFileIterator = csvBuilder.getCSVFileIterator(reader, IPLMostWicketsData.class);
-            Iterable<IPLMostWicketsData> dataIterable=()->csvFileIterator;
-            StreamSupport.stream(dataIterable.spliterator(), false)
-                    .map(IPLMostWicketsData.class::cast)
-                    .forEach(field -> daoMap1.put(field.player, new IPLWicketsDAO(field)));
-            return daoMap1.size();
-        }
-        catch (IOException | RuntimeException e)
-        {
-            throw new CSVBuilderException(e.getMessage(), CSVBuilderException.ExceptionType.IPL_FILE_PROBLEM);
-        }
-        catch (CSVBuilderException e)
-        {
-            throw new CSVBuilderException(e.getMessage(), CSVBuilderException.ExceptionType.UNABLE_TO_PARSE);
-        }
+        this.player = player;
+        IPLAdapter iplAdapter = IPLBuilderFactory.getIPLPlayer(player);
+        Map<String, IPLPlayerDAO> map = iplAdapter.loadIPLData(iplFilePath);
+        return map;
     }
 
     public String getSortByField(SortByBasedOnField fieldName) throws CSVBuilderException

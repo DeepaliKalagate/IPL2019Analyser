@@ -10,8 +10,8 @@ public class IPLWicketsDAO
     public int  runs;
     public String wickets;
     public int bbi;
-    public double  avg;
-    public double econ;
+    public double average;
+    public double economyRate;
     public double strikeRate;
     public int numberOfFourWkts;
     public int  numberOfFiveWkts;
@@ -26,8 +26,8 @@ public class IPLWicketsDAO
         runs=iplMostWicketsData.runs;
         wickets=iplMostWicketsData.wickets;
         bbi=iplMostWicketsData.bbi;
-        avg=iplMostWicketsData.avg;
-        econ=iplMostWicketsData.econ;
+        average =iplMostWicketsData.average;
+        economyRate =iplMostWicketsData.economyRate;
         strikeRate=iplMostWicketsData.strikeRate;
         numberOfFourWkts=iplMostWicketsData.numberOfFourWkts;
         numberOfFiveWkts=iplMostWicketsData.numberOfFiveWkts;

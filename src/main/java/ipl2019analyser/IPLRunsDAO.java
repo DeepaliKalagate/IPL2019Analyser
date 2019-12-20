@@ -2,15 +2,15 @@ package ipl2019analyser;
 
 public class IPLRunsDAO
 {
-    public int pos;
+    public int position;
     public String  player;
-    public int mat;
-    public int  inns;
-    public int no;
+    public int matches;
+    public int innings;
+    public int notOut;
     public int runs;
-    public String hs;
-    public double avg;
-    public int bf;
+    public String highestScore;
+    public double average;
+    public int ballsFaced;
     public double strikeRate;
     public int hundred;
     public int  fifty;
@@ -19,15 +19,15 @@ public class IPLRunsDAO
 
     public IPLRunsDAO(IPLMostRunsData iplMostRunsData)
     {
-        pos=iplMostRunsData.pos;
+        position =iplMostRunsData.position;
         player=iplMostRunsData.player;
-        mat=iplMostRunsData.mat;
-        inns=iplMostRunsData.inns;
-        no=iplMostRunsData.no;
+        matches =iplMostRunsData.matches;
+        innings =iplMostRunsData.innings;
+        notOut =iplMostRunsData.notOut;
         runs=iplMostRunsData.runs;
-        hs=iplMostRunsData.hs;
-        avg=iplMostRunsData.avg;
-        bf=iplMostRunsData.bf;
+        highestScore =iplMostRunsData.highestScore;
+        average =iplMostRunsData.average;
+        ballsFaced =iplMostRunsData.ballsFaced;
         strikeRate =iplMostRunsData.strikeRate;
         hundred=iplMostRunsData.hundred;
         fifty=iplMostRunsData.fifty;

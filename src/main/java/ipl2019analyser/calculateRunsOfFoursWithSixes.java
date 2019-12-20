@@ -1,7 +1,7 @@
 package ipl2019analyser;
 import java.util.Comparator;
 
-public class SortByFoursWithSixes implements Comparator<IPLRunsDAO>
+public class calculateRunsOfFoursWithSixes implements Comparator<IPLRunsDAO>
 {
     @Override
     public int compare(IPLRunsDAO iplRunsDAO1, IPLRunsDAO iplRunsDAO2)
