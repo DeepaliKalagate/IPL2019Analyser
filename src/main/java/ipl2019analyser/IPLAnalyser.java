@@ -32,7 +32,7 @@ public class IPLAnalyser
         Comparator<IPLPlayerDAO> maximumRuns=Comparator.comparing(field->field.runs);
         Comparator<IPLPlayerDAO> runsWithAverage=maximumRuns.thenComparing(average);
         this.comparatorMap.put(SortByBasedOnField.Maximum_Runs_With_Average,runsWithAverage.reversed());
-        this.comparatorMap.put(SortByBasedOnField.Economy_Rate,Comparator.comparing(field->field.economyRate,Comparator.reverseOrder()));
+        this.comparatorMap.put(SortByBasedOnField.Economy_Rate,Comparator.comparing(field->field.economyRate));
         this.comparatorMap.put(SortByBasedOnField.Result_Of_Five_Four_Wickets,new CalculateWickets().reversed());
         this.comparatorMap.put(SortByBasedOnField.Strike_Rate_Wth_Four_Five_Wickets,new CalculateWickets().reversed()
                                     .thenComparing(field->field.strikeRate));
