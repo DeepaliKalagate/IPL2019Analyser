@@ -200,10 +200,10 @@ public class IPLAnalyserTest
     {
         try
         {
-            Map<String, IPLPlayerDAO> dataMap = iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.WICKETS, IPL_MOST_RUNS_FILE_PATH,IPL_MOST_WKTS_FILE_PATH);
+            Map<String, IPLPlayerDAO> dataMap = iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.WICKETS,IPL_MOST_WKTS_FILE_PATH,IPL_MOST_RUNS_FILE_PATH);
             String dataString = iplAnalyser.getSortByField(SortByBasedOnField.Average, dataMap);
             IPLMostWicketsData[] wicketsData = new Gson().fromJson(dataString, IPLMostWicketsData[].class);
-            Assert.assertEquals("Krishnappa Gowtham", wicketsData[0].player);
+            Assert.assertEquals("Andre Russell", wicketsData[0].player);
         }
         catch (CSVBuilderException e)
         {
@@ -215,10 +215,10 @@ public class IPLAnalyserTest
     {
         try
         {
-            Map<String,IPLPlayerDAO> daoMap=iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.WICKETS,IPL_MOST_RUNS_FILE_PATH,IPL_MOST_WKTS_FILE_PATH);
+            Map<String,IPLPlayerDAO> daoMap=iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.WICKETS,IPL_MOST_WKTS_FILE_PATH,IPL_MOST_RUNS_FILE_PATH);
             String sortedData=iplAnalyser.getSortByField(SortByBasedOnField.Strike_Rate,daoMap);
             IPLMostWicketsData[] wicketsData=new Gson().fromJson(sortedData,IPLMostWicketsData[].class);
-            Assert.assertEquals("Ishant Sharma",wicketsData[0].player);
+            Assert.assertEquals("Krishnappa Gowtham",wicketsData[0].player);
         }
         catch (CSVBuilderException e)
         {
@@ -230,10 +230,10 @@ public class IPLAnalyserTest
     {
         try
         {
-            Map<String,IPLPlayerDAO> daoMap=iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.WICKETS,IPL_MOST_RUNS_FILE_PATH,IPL_MOST_WKTS_FILE_PATH);
+            Map<String,IPLPlayerDAO> daoMap=iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.WICKETS,IPL_MOST_WKTS_FILE_PATH,IPL_MOST_RUNS_FILE_PATH);
             String sortedData=iplAnalyser.getSortByField(SortByBasedOnField.Economy_Rate,daoMap);
             IPLMostWicketsData[] wicketsData=new Gson().fromJson(sortedData,IPLMostWicketsData[].class);
-            Assert.assertEquals("Marcus Stoinis",wicketsData[0].player);
+            Assert.assertEquals("Ben Cutting",wicketsData[0].player);
         }
         catch (CSVBuilderException e)
         {
@@ -245,10 +245,10 @@ public class IPLAnalyserTest
     {
         try
         {
-            Map<String,IPLPlayerDAO> daoMap=iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.WICKETS,IPL_MOST_RUNS_FILE_PATH,IPL_MOST_WKTS_FILE_PATH);
+            Map<String,IPLPlayerDAO> daoMap=iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.WICKETS,IPL_MOST_WKTS_FILE_PATH,IPL_MOST_RUNS_FILE_PATH);
             String sortedData=iplAnalyser.getSortByField(SortByBasedOnField.Result_Of_Five_Four_Wickets,daoMap);
             IPLMostWicketsData[] wicketsData=new Gson().fromJson(sortedData,IPLMostWicketsData[].class);
-            Assert.assertEquals("Marcus Stoinis",wicketsData[0].player);
+            Assert.assertEquals("Lasith Malinga",wicketsData[0].player);
         }
         catch (CSVBuilderException e)
         {
@@ -260,10 +260,10 @@ public class IPLAnalyserTest
     {
         try
         {
-            Map<String,IPLPlayerDAO> daoMap=iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.WICKETS,IPL_MOST_RUNS_FILE_PATH,IPL_MOST_WKTS_FILE_PATH);
+            Map<String,IPLPlayerDAO> daoMap=iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.WICKETS,IPL_MOST_WKTS_FILE_PATH,IPL_MOST_RUNS_FILE_PATH);
             String sortedData=iplAnalyser.getSortByField(SortByBasedOnField.Strike_Rate_Wth_Four_Five_Wickets,daoMap);
             IPLMostWicketsData[] wicketsData=new Gson().fromJson(sortedData,IPLMostWicketsData[].class);
-            Assert.assertEquals("Bhuvneshwar Kumar",wicketsData[0].player);
+            Assert.assertEquals("Kagiso Rabada",wicketsData[0].player);
         }
         catch (CSVBuilderException e)
         {
@@ -275,10 +275,10 @@ public class IPLAnalyserTest
     {
         try
         {
-            Map<String,IPLPlayerDAO> daoMap=iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.WICKETS,IPL_MOST_RUNS_FILE_PATH,IPL_MOST_WKTS_FILE_PATH);
+            Map<String,IPLPlayerDAO> daoMap=iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.WICKETS,IPL_MOST_WKTS_FILE_PATH,IPL_MOST_RUNS_FILE_PATH);
             String sortedData=iplAnalyser.getSortByField(SortByBasedOnField.Great_Average_With_Strike_Rate,daoMap);
             IPLMostWicketsData[] wicketsData=new Gson().fromJson(sortedData,IPLMostWicketsData[].class);
-            Assert.assertEquals("Krishnappa Gowtham",wicketsData[0].player);
+            Assert.assertEquals("Andre Russell",wicketsData[0].player);
         }
         catch (CSVBuilderException e)
         {
@@ -290,10 +290,10 @@ public class IPLAnalyserTest
     {
         try
         {
-            Map<String,IPLPlayerDAO> daoMap=iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.WICKETS,IPL_MOST_RUNS_FILE_PATH,IPL_MOST_WKTS_FILE_PATH);
+            Map<String,IPLPlayerDAO> daoMap=iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.WICKETS,IPL_MOST_WKTS_FILE_PATH,IPL_MOST_RUNS_FILE_PATH);
             String sortedData=iplAnalyser.getSortByField(SortByBasedOnField.Maximum_Wickets_With_Average,daoMap);
             IPLMostWicketsData[] playerDAO=new Gson().fromJson(sortedData,IPLMostWicketsData[].class);
-            Assert.assertEquals("Shimron Hetmyer",playerDAO[0].player);
+            Assert.assertEquals("Imran Tahir",playerDAO[0].player);
         }
         catch (CSVBuilderException e)
         {
@@ -305,13 +305,44 @@ public class IPLAnalyserTest
     {
         try
         {
-            Map<String,IPLPlayerDAO> daoMap=iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.WICKETS,IPL_MOST_RUNS_FILE_PATH,IPL_MOST_WKTS_FILE_PATH);
+            Map<String,IPLPlayerDAO> daoMap=iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.WICKETS,IPL_MOST_WKTS_FILE_PATH,IPL_MOST_RUNS_FILE_PATH);
             String sortedData=iplAnalyser.getSortByField(SortByBasedOnField.Maximum_Batting_With_Bowling_Average,daoMap);
             IPLPlayerDAO[] playerDAO=new Gson().fromJson(sortedData,IPLPlayerDAO[].class);
-            Assert.assertEquals("Krishnappa Gowtham",playerDAO[0].player);
+            Assert.assertEquals("Andre Russell",playerDAO[0].player);
         }
         catch (CSVBuilderException e)
         {
         }
     }
+
+    @Test
+    public void givenIPLData_CheckRecords_SortDataBasedOnWickets()
+    {
+        try
+        {
+            Map<String,IPLPlayerDAO> daoMap=iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.WICKETS,IPL_MOST_WKTS_FILE_PATH,IPL_MOST_RUNS_FILE_PATH);
+            String sortedData=iplAnalyser.getSortByField(SortByBasedOnField.Maximum_Wickets,daoMap);
+            IPLPlayerDAO[] playerDAO=new Gson().fromJson(sortedData,IPLPlayerDAO[].class);
+            Assert.assertEquals("Imran Tahir",playerDAO[0].player);
+        }
+        catch (CSVBuilderException e)
+        {
+        }
+    }
+
+    @Test
+    public void givenIPLData_CheckRecords_SortDataBasedOnRuns()
+    {
+        try
+        {
+            Map<String,IPLPlayerDAO> daoMap=iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.RUNS,IPL_MOST_RUNS_FILE_PATH,IPL_MOST_WKTS_FILE_PATH);
+            String sortedData=iplAnalyser.getSortByField(SortByBasedOnField.Maximum_Runs,daoMap);
+            IPLPlayerDAO[] playerDAO=new Gson().fromJson(sortedData,IPLPlayerDAO[].class);
+            Assert.assertEquals("David Warner ",playerDAO[0].player);
+        }
+        catch (CSVBuilderException e)
+        {
+        }
+    }
+
 }

@@ -43,6 +43,7 @@ public class IPLAnalyser
         Comparator<IPLPlayerDAO> bowlingAverage=Comparator.comparing(field->field.bowlingAverage);
         Comparator<IPLPlayerDAO> resultAverage=battingAverage.thenComparing(bowlingAverage);
         this.comparatorMap.put(SortByBasedOnField.Maximum_Batting_With_Bowling_Average,resultAverage.reversed());
+        this.comparatorMap.put(SortByBasedOnField.Maximum_Wickets,Comparator.comparing(field->field.wickets,Comparator.reverseOrder()));
     }
     public boolean checkIPLDataFile(String... iplFilePath)
     {
