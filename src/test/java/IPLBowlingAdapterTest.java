@@ -7,7 +7,7 @@ import org.junit.rules.ExpectedException;
 
 import java.util.Map;
 
-public class IPLWicketsTest
+public class IPLBowlingAdapterTest
 {
     private static final String IPL_MOST_WKTS_FILE_PATH="/home/user/IPL2019Analyser/src/test/resources/IPL2019FactsheetMostWkts.csv";
     private static final String IPL_MOST_WKTS_EMPTY_FILE_PATH="/home/user/IPL2019Analyser/src/test/resources/IPL2019MostWickets.csv";

@@ -21,11 +21,11 @@ public abstract class IPLAdapter
         this.playerDAOMap = new HashMap<>();
     }
 
-    public abstract Map<String, IPLPlayerDAO> loadIPLData(String iplFilePath) throws CSVBuilderException;
+    public abstract Map<String, IPLPlayerDAO> loadIPLData(String... iplFilePath) throws CSVBuilderException;
 
-    public <E> Map<String, IPLPlayerDAO> loadIPLData(Class<E> eClass, String iplFilePath) throws CSVBuilderException
+    public <E> Map<String, IPLPlayerDAO> loadIPLData(Class<E> eClass, String... iplFilePath) throws CSVBuilderException
     {
-        try (Reader reader = Files.newBufferedReader(Paths.get(iplFilePath)))
+        try (Reader reader = Files.newBufferedReader(Paths.get(iplFilePath[0])))
         {
             ICVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
             Iterator<E> csvFileIterator = csvBuilder.getCSVFileIterator(reader, eClass);

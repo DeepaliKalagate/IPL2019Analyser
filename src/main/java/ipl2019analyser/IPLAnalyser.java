@@ -36,47 +36,50 @@ public class IPLAnalyser
         this.comparatorMap.put(SortByBasedOnField.Result_Of_Five_Four_Wickets,new CalculateWickets().reversed());
         this.comparatorMap.put(SortByBasedOnField.Strike_Rate_Wth_Four_Five_Wickets,new CalculateWickets().reversed()
                                     .thenComparing(field->field.strikeRate));
-        this.comparatorMap.put(SortByBasedOnField.Maximum_Wickets,Comparator.comparing(field->field.wickets,Comparator.reverseOrder()));
         Comparator<IPLPlayerDAO> maximumWickets=Comparator.comparing(field->field.wickets);
-        Comparator<IPLPlayerDAO> wicketsWithAverage=maximumRuns.thenComparing(average);
-        this.comparatorMap.put(SortByBasedOnField.Maximum_Wickets_With_Average,runsWithAverage.reversed());
+        this.comparatorMap.put(SortByBasedOnField.Maximum_Wickets_With_Average,maximumWickets.reversed().thenComparing(average));
+        this.comparatorMap.put(SortByBasedOnField.Bowling_Average,Comparator.comparing(field->field.bowlingAverage,Comparator.reverseOrder()));
+        Comparator<IPLPlayerDAO> battingAverage=Comparator.comparing(field->field.average);
+        Comparator<IPLPlayerDAO> bowlingAverage=Comparator.comparing(field->field.bowlingAverage);
+        Comparator<IPLPlayerDAO> resultAverage=battingAverage.thenComparing(bowlingAverage);
+        this.comparatorMap.put(SortByBasedOnField.Maximum_Batting_With_Bowling_Average,resultAverage.reversed());
     }
-    public boolean checkIPLDataFile(String iplFilePath)
+    public boolean checkIPLDataFile(String... iplFilePath)
     {
-        File file = new File(iplFilePath);
+        File file = new File(iplFilePath[0]);
         if (file.exists())
             return true;
         return false;
     }
 
-    public boolean checkIPLDataFileIsEmptyOrNot(String iplFilePath)
+    public boolean checkIPLDataFileIsEmptyOrNot(String... iplFilePath)
     {
-        File file=new File(iplFilePath);
+        File file=new File(iplFilePath[0]);
         if(file.length()==0)
             return true;
         return false;
     }
 
-    public boolean checkIPLData(String iplFilePath)
+    public boolean checkIPLData(String... iplFilePath)
     {
-        File file=new File(iplFilePath);
+        File file=new File(iplFilePath[0]);
         if (file.canRead())
             return true;
         return false;
     }
 
-    public boolean checkIPLMostRunsDataFileIsHidden(String iplFilePath)
+    public boolean checkIPLMostRunsDataFileIsHidden(String... iplFilePath)
     {
-        File file=new File(iplFilePath);
+        File file=new File(iplFilePath[0]);
         if (file.isHidden())
             return true;
         return false;
     }
 
-    public Map<String, IPLPlayerDAO> getIPLPlayerData(PlayerEnumTypes player, String iplFilePath) throws CSVBuilderException
+    public Map<String, IPLPlayerDAO> getIPLPlayerData(PlayerEnumTypes player, String... iplFilePath) throws CSVBuilderException
     {
-        this.player = player;
         IPLAdapter iplAdapter = IPLBuilderFactory.getIPLPlayer(player);
+        this.player = player;
         Map<String, IPLPlayerDAO> map = iplAdapter.loadIPLData(iplFilePath);
         return map;
     }
@@ -89,8 +92,7 @@ public class IPLAnalyser
             throw new CSVBuilderException("No Data", CSVBuilderException
                     .ExceptionType.IPL_FILE_PROBLEM);
         }
-        ArrayList list = daoMap.values()
-                .stream()
+        ArrayList list = daoMap.values().stream()
                 .sorted(this.comparatorMap.get(fieldName))
                 .collect(Collectors.toCollection(ArrayList::new));
         String sortedData = new Gson().toJson(list);

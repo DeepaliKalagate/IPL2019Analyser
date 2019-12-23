@@ -7,7 +7,7 @@ import org.junit.rules.ExpectedException;
 
 import java.util.Map;
 
-public class IPLRunsTest
+public class IPLBattingAdapterTest
 {
     private static final String IPL_MOST_RUNS_FILE_PATH ="/home/user/IPL2019Analyser/src/test/resources/IPL2019FactsheetMostRuns.csv";
     private static final String IPL_WRONG_FILE_PATH = "./src/main/resources/IPL2019FactsheetMostRuns.csv";

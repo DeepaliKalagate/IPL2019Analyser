@@ -5,9 +5,9 @@ public class IPLBuilderFactory
     public static IPLAdapter getIPLPlayer(IPLAnalyser.PlayerEnumTypes player)
     {
         if(player.equals(IPLAnalyser.PlayerEnumTypes.RUNS))
-            return new IPLRuns();
+            return new IPLBattingAdapter();
         else if(player.equals(IPLAnalyser.PlayerEnumTypes.WICKETS))
-            return new IPLWickets();
+            return new IPLBowlingAdapter();
         return null;
     }
 }

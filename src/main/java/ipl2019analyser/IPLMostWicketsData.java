@@ -4,24 +4,12 @@ import com.opencsv.bean.CsvBindByName;
 
 public class IPLMostWicketsData
 {
-    @CsvBindByName(column = "POS")
-    public int position;
     @CsvBindByName(column = "PLAYER")
     public String  player;
-    @CsvBindByName(column = "Mat")
-    public int matches;
-    @CsvBindByName(column = "Inns")
-    public int  innings;
-    @CsvBindByName(column = "Ov")
-    public double over;
-    @CsvBindByName(column = "Runs")
-    public int  runs;
     @CsvBindByName(column = "Wkts")
-    public String wickets;
-    @CsvBindByName(column = "BBI")
-    public int bbi;
+    public int wickets;
     @CsvBindByName(column = "Avg")
-    public double average;
+    public double bowlingAverage;
     @CsvBindByName(column = "Econ")
     public double economyRate;
     @CsvBindByName(column = "SR")
@@ -35,20 +23,30 @@ public class IPLMostWicketsData
     {
     }
 
-    public IPLMostWicketsData(int position, String player, int matches, int innings, double over, int runs, String wickets, int bbi, double average, double economyRate, double strikeRate, int numberOfFourWkts, int numberOfFiveWkts)
+    public IPLMostWicketsData(String player,int wickets,double bowlingAverage, double economyRate, double strikeRate, int numberOfFourWkts, int numberOfFiveWkts)
     {
-        this.position = position;
         this.player = player;
-        this.matches = matches;
-        this.innings = innings;
-        this.over = over;
-        this.runs = runs;
         this.wickets = wickets;
-        this.bbi = bbi;
-        this.average = average;
+        this.bowlingAverage = bowlingAverage;
         this.economyRate = economyRate;
         this.strikeRate = strikeRate;
         this.numberOfFourWkts = numberOfFourWkts;
         this.numberOfFiveWkts = numberOfFiveWkts;
+    }
+
+    public IPLMostWicketsData(IPLAnalyser.PlayerEnumTypes player, int wickets, double bowlingAverage, double economyRate, double strikeRate, int numberOfFourWkts, int numberOfFiveWkts) {
+    }
+
+    @Override
+    public String toString() {
+        return "IPLMostWicketsData{" +
+                "player='" + player + '\'' +
+                ", wickets=" + wickets +
+                ", bowlingAverage=" + bowlingAverage +
+                ", economyRate=" + economyRate +
+                ", strikeRate=" + strikeRate +
+                ", numberOfFourWkts=" + numberOfFourWkts +
+                ", numberOfFiveWkts=" + numberOfFiveWkts +
+                '}';
     }
 }
