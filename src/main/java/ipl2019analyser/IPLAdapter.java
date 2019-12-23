@@ -47,13 +47,9 @@ public abstract class IPLAdapter
             }
             return playerDAOMap;
         }
-        catch (IOException | RuntimeException e)
+        catch (IOException | RuntimeException | CSVBuilderException e)
         {
             throw new CSVBuilderException("Error in File Reading", CSVBuilderException.ExceptionType.IPL_FILE_PROBLEM);
-        }
-        catch (CSVBuilderException e)
-        {
-            throw new CSVBuilderException("Unable to Build Bean", CSVBuilderException.ExceptionType.UNABLE_TO_PARSE);
         }
     }
 }

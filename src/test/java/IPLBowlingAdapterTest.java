@@ -28,20 +28,6 @@ public class IPLBowlingAdapterTest
     }
 
     @Test
-    public void givenIPLMostWicketsData_CheckFileCanReadOrNot_ShouldReturnTrueOrFalse()
-    {
-        boolean result = iplAnalyser.checkIPLData(IPL_MOST_WKTS_FILE_PATH);
-        Assert.assertEquals(true,result);
-    }
-
-    @Test
-    public void givenIPLMostWicketsData_CheckFileIsHiddenOrNot_ShouldReturnTrueOrFalse()
-    {
-        boolean result = iplAnalyser.checkIPLMostRunsDataFileIsHidden(IPL_MOST_WKTS_FILE_PATH);
-        Assert.assertEquals(false,result);
-    }
-
-    @Test
     public void givenIPLMostWicketsData_WhenFileIsEmpty_ShouldThrowException()
     {
         try

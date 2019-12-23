@@ -44,6 +44,7 @@ public class IPLAnalyser
         Comparator<IPLPlayerDAO> resultAverage=battingAverage.thenComparing(bowlingAverage);
         this.comparatorMap.put(SortByBasedOnField.Maximum_Batting_With_Bowling_Average,resultAverage.reversed());
         this.comparatorMap.put(SortByBasedOnField.Maximum_Wickets,Comparator.comparing(field->field.wickets,Comparator.reverseOrder()));
+        this.comparatorMap.put(SortByBasedOnField.All_Rounder,resultAverage.reversed());
     }
     public boolean checkIPLDataFile(String... iplFilePath)
     {
@@ -57,22 +58,6 @@ public class IPLAnalyser
     {
         File file=new File(iplFilePath[0]);
         if(file.length()==0)
-            return true;
-        return false;
-    }
-
-    public boolean checkIPLData(String... iplFilePath)
-    {
-        File file=new File(iplFilePath[0]);
-        if (file.canRead())
-            return true;
-        return false;
-    }
-
-    public boolean checkIPLMostRunsDataFileIsHidden(String... iplFilePath)
-    {
-        File file=new File(iplFilePath[0]);
-        if (file.isHidden())
             return true;
         return false;
     }

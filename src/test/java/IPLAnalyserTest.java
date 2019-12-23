@@ -12,8 +12,7 @@ public class IPLAnalyserTest
     private static final String IPL_MOST_RUNS_FILE_PATH ="/home/user/IPL2019Analyser/src/test/resources/IPL2019FactsheetMostRuns.csv";
     private static final String IPL_MOST_WKTS_FILE_PATH="/home/user/IPL2019Analyser/src/test/resources/IPL2019FactsheetMostWkts.csv";
     private static final String IPL_EMPTY_FILE_PATH="/home/user/IPL2019Analyser/src/test/resources/IPL2019MostRuns.csv";
-    private static final String IPL__WKTS_WRONG_FILE_PATH = "./src/main/resources/IPL2019FactsheetMostWkts.csv";
-    private static final String WRONG_IPL_MOST_WICKETS_FILE_TYPE="/home/user/IPL2019Analyser/src/test/resources/IPL2019MostRunsFile.cst";
+    private static final String IPL__WKTS_WRONG_FILE_PATH =" ";
     IPLAnalyser iplAnalyser=new IPLAnalyser();
 
     @Test
@@ -24,6 +23,14 @@ public class IPLAnalyserTest
     }
 
     @Test
+    public void givenIPLData_CheckFilesNotPresent_ShouldReturnTrueOrFalse()
+    {
+        boolean result = iplAnalyser.checkIPLDataFile(IPL__WKTS_WRONG_FILE_PATH);
+        Assert.assertEquals(false,result);
+    }
+
+
+    @Test
     public void givenIPLData_CheckFilesAreEmptyOrNot_IfValidShouldReturnTrueOrFalse()
     {
         boolean result=iplAnalyser.checkIPLDataFileIsEmptyOrNot(IPL_MOST_RUNS_FILE_PATH,IPL_MOST_WKTS_FILE_PATH);
@@ -31,17 +38,10 @@ public class IPLAnalyserTest
     }
 
     @Test
-    public void gievnIPLDataFile_CheckFileCanRead_IfValidShouldReturnTrueOrFalse()
+    public void givenIPLData_CheckFilesAreEmpty_IfValidShouldReturnTrueOrFalse()
     {
-        boolean result=iplAnalyser.checkIPLData(IPL_MOST_RUNS_FILE_PATH,IPL_MOST_WKTS_FILE_PATH);
+        boolean result=iplAnalyser.checkIPLDataFileIsEmptyOrNot(IPL_EMPTY_FILE_PATH);
         Assert.assertEquals(true,result);
-    }
-
-    @Test
-    public void gievnIPLDataFile_CheckFilesAreHiddenOrNot_IfValidShouldReturnTrueOrFalse()
-    {
-        boolean result=iplAnalyser.checkIPLMostRunsDataFileIsHidden(IPL_MOST_RUNS_FILE_PATH,IPL_MOST_WKTS_FILE_PATH);
-        Assert.assertEquals(false,result);
     }
 
     @Test
@@ -175,6 +175,22 @@ public class IPLAnalyserTest
             String sortedData = iplAnalyser.getSortByField(SortByBasedOnField.Maximum_Runs_With_Average,daoMap);
             IPLMostRunsData[] runsData = new Gson().fromJson(sortedData, IPLMostRunsData[].class);
             Assert.assertEquals("David Warner ", runsData[0].player);
+        }
+        catch (CSVBuilderException e)
+        {
+            Assert.assertEquals(CSVBuilderException.ExceptionType.IPL_FILE_PROBLEM, e.type);
+        }
+    }
+
+    @Test
+    public void givenIPLData_WhenSortedWithEmptyFile_ShouldReturnSortedResult()
+    {
+        try
+        {
+            Map<String, IPLPlayerDAO> daoMap =iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.RUNS,IPL_EMPTY_FILE_PATH);
+            String sortedData = iplAnalyser.getSortByField(SortByBasedOnField.Maximum_Runs_With_Average,daoMap);
+            IPLMostRunsData[] runsData = new Gson().fromJson(sortedData, IPLMostRunsData[].class);
+            Assert.assertEquals(" ", runsData[0].player);
         }
         catch (CSVBuilderException e)
         {
@@ -345,4 +361,18 @@ public class IPLAnalyserTest
         }
     }
 
+    @Test
+    public void givenIPLData_CheckRecords_SortDataBasedOnAllRounder()
+    {
+        try
+        {
+            Map<String,IPLPlayerDAO> daoMap=iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.WICKETS,IPL_MOST_WKTS_FILE_PATH,IPL_MOST_RUNS_FILE_PATH);
+            String sortedData=iplAnalyser.getSortByField(SortByBasedOnField.All_Rounder,daoMap);
+            IPLPlayerDAO[] playerDAO=new Gson().fromJson(sortedData,IPLPlayerDAO[].class);
+            Assert.assertEquals("Andre Russell",playerDAO[0].player);
+        }
+        catch (CSVBuilderException e)
+        {
+        }
+    }
 }
