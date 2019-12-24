@@ -1,5 +1,4 @@
 package ipl2019analyser;
-
 import java.util.Comparator;
 
 public class CalculateWickets implements Comparator<IPLPlayerDAO>

@@ -4,7 +4,6 @@ import ipl2019analyser.*;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
 import java.util.Map;
 
 public class IPLAnalyserTest
@@ -18,6 +17,7 @@ public class IPLAnalyserTest
     @Test
     public void givenIPLData_CheckFilesArePresentOrNot_ShouldReturnTrueOrFalse()
     {
+        iplAnalyser.setIPLAdapter(IPLBuilderFactory.getIPLPlayer(IPLAnalyser.PlayerEnumTypes.RUNS));
             boolean result = iplAnalyser.checkIPLDataFile(IPL_MOST_RUNS_FILE_PATH,IPL_MOST_WKTS_FILE_PATH);
             Assert.assertEquals(true,result);
     }
@@ -25,6 +25,7 @@ public class IPLAnalyserTest
     @Test
     public void givenIPLData_CheckFilesNotPresent_ShouldReturnTrueOrFalse()
     {
+        iplAnalyser.setIPLAdapter(IPLBuilderFactory.getIPLPlayer(IPLAnalyser.PlayerEnumTypes.RUNS));
         boolean result = iplAnalyser.checkIPLDataFile(IPL__WKTS_WRONG_FILE_PATH);
         Assert.assertEquals(false,result);
     }
@@ -33,6 +34,7 @@ public class IPLAnalyserTest
     @Test
     public void givenIPLData_CheckFilesAreEmptyOrNot_IfValidShouldReturnTrueOrFalse()
     {
+        iplAnalyser.setIPLAdapter(IPLBuilderFactory.getIPLPlayer(IPLAnalyser.PlayerEnumTypes.RUNS));
         boolean result=iplAnalyser.checkIPLDataFileIsEmptyOrNot(IPL_MOST_RUNS_FILE_PATH,IPL_MOST_WKTS_FILE_PATH);
         Assert.assertEquals(false,result);
     }
@@ -40,6 +42,7 @@ public class IPLAnalyserTest
     @Test
     public void givenIPLData_CheckFilesAreEmpty_IfValidShouldReturnTrueOrFalse()
     {
+        iplAnalyser.setIPLAdapter(IPLBuilderFactory.getIPLPlayer(IPLAnalyser.PlayerEnumTypes.RUNS));
         boolean result=iplAnalyser.checkIPLDataFileIsEmptyOrNot(IPL_EMPTY_FILE_PATH);
         Assert.assertEquals(true,result);
     }
@@ -49,6 +52,7 @@ public class IPLAnalyserTest
     {
         try
         {
+            iplAnalyser.setIPLAdapter(IPLBuilderFactory.getIPLPlayer(IPLAnalyser.PlayerEnumTypes.RUNS));
             ExpectedException exceptionRule = ExpectedException.none();
             exceptionRule.expect(CSVBuilderException.class);
             iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.RUNS,IPL_EMPTY_FILE_PATH);
@@ -64,6 +68,7 @@ public class IPLAnalyserTest
     {
         try
         {
+            iplAnalyser.setIPLAdapter(IPLBuilderFactory.getIPLPlayer(IPLAnalyser.PlayerEnumTypes.RUNS));
             ExpectedException exceptionRule = ExpectedException.none();
             exceptionRule.expect(CSVBuilderException.class);
             iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.RUNS," "," ");
@@ -79,6 +84,7 @@ public class IPLAnalyserTest
     {
         try
         {
+            iplAnalyser.setIPLAdapter(IPLBuilderFactory.getIPLPlayer(IPLAnalyser.PlayerEnumTypes.RUNS));
             Map<String, IPLPlayerDAO> result=iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.RUNS,IPL_MOST_RUNS_FILE_PATH,IPL_MOST_WKTS_FILE_PATH);
             Assert.assertEquals(100,result.size());
         }
@@ -86,19 +92,21 @@ public class IPLAnalyserTest
         {
         }
     }
+
     @Test
     public void givenIPLData_WhenSortedOnAverage_ShouldReturnSortedResult()
     {
         try
         {
-            Map<String, IPLPlayerDAO> daoMap =iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.RUNS,IPL_MOST_RUNS_FILE_PATH,IPL_MOST_WKTS_FILE_PATH);
-            String sortedData = iplAnalyser.getSortByField(SortByBasedOnField.Average,daoMap);
-            IPLMostRunsData[] runsData = new Gson().fromJson(sortedData, IPLMostRunsData[].class);
-            Assert.assertEquals("MS Dhoni", runsData[0].player);
+            iplAnalyser.setIPLAdapter(IPLBuilderFactory.getIPLPlayer(IPLAnalyser.PlayerEnumTypes.RUNS));
+            Map<String,IPLPlayerDAO> daoMap=iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.RUNS,IPL_MOST_RUNS_FILE_PATH);
+            String sortByAverage = iplAnalyser.getSortByField(SortByBasedOnField.Average,daoMap);
+            IPLMostRunsData[] iplRuns = new Gson().fromJson(sortByAverage, IPLMostRunsData[].class);
+            Assert.assertEquals("MS Dhoni",iplRuns[0].player);
         }
         catch (CSVBuilderException e)
         {
-            Assert.assertEquals(CSVBuilderException.ExceptionType.IPL_FILE_PROBLEM, e.type);
+            e.printStackTrace();
         }
     }
 
@@ -107,6 +115,7 @@ public class IPLAnalyserTest
     {
         try
         {
+            iplAnalyser.setIPLAdapter(IPLBuilderFactory.getIPLPlayer(IPLAnalyser.PlayerEnumTypes.RUNS));
             Map<String, IPLPlayerDAO> daoMap =iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.RUNS,IPL_MOST_RUNS_FILE_PATH,IPL_MOST_WKTS_FILE_PATH);
             String sortedData = iplAnalyser.getSortByField(SortByBasedOnField.Strike_Rate,daoMap);
             IPLMostRunsData[] runsData = new Gson().fromJson(sortedData, IPLMostRunsData[].class);
@@ -123,6 +132,7 @@ public class IPLAnalyserTest
     {
         try
         {
+            iplAnalyser.setIPLAdapter(IPLBuilderFactory.getIPLPlayer(IPLAnalyser.PlayerEnumTypes.RUNS));
             Map<String, IPLPlayerDAO> daoMap =iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.RUNS,IPL_MOST_RUNS_FILE_PATH,IPL_MOST_WKTS_FILE_PATH);
             String sortedData = iplAnalyser.getSortByField(SortByBasedOnField.Result_Of_Fours_Sixes,daoMap);
             IPLMostRunsData[] runsData = new Gson().fromJson(sortedData, IPLMostRunsData[].class);
@@ -139,6 +149,7 @@ public class IPLAnalyserTest
     {
         try
         {
+            iplAnalyser.setIPLAdapter(IPLBuilderFactory.getIPLPlayer(IPLAnalyser.PlayerEnumTypes.RUNS));
             Map<String, IPLPlayerDAO> daoMap =iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.RUNS,IPL_MOST_RUNS_FILE_PATH,IPL_MOST_WKTS_FILE_PATH);
             String sortedData = iplAnalyser.getSortByField(SortByBasedOnField.Strike_Rate_With_SixesWithFours,daoMap);
             IPLMostRunsData[] runsData = new Gson().fromJson(sortedData, IPLMostRunsData[].class);
@@ -155,6 +166,7 @@ public class IPLAnalyserTest
     {
         try
         {
+            iplAnalyser.setIPLAdapter(IPLBuilderFactory.getIPLPlayer(IPLAnalyser.PlayerEnumTypes.RUNS));
             Map<String, IPLPlayerDAO> daoMap =iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.RUNS,IPL_MOST_RUNS_FILE_PATH,IPL_MOST_WKTS_FILE_PATH);
             String sortedData = iplAnalyser.getSortByField(SortByBasedOnField.Great_Average_With_Strike_Rate,daoMap);
             IPLMostRunsData[] runsData = new Gson().fromJson(sortedData, IPLMostRunsData[].class);
@@ -171,6 +183,7 @@ public class IPLAnalyserTest
     {
         try
         {
+            iplAnalyser.setIPLAdapter(IPLBuilderFactory.getIPLPlayer(IPLAnalyser.PlayerEnumTypes.RUNS));
             Map<String, IPLPlayerDAO> daoMap =iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.RUNS,IPL_MOST_RUNS_FILE_PATH,IPL_MOST_WKTS_FILE_PATH);
             String sortedData = iplAnalyser.getSortByField(SortByBasedOnField.Maximum_Runs_With_Average,daoMap);
             IPLMostRunsData[] runsData = new Gson().fromJson(sortedData, IPLMostRunsData[].class);
@@ -187,6 +200,7 @@ public class IPLAnalyserTest
     {
         try
         {
+            iplAnalyser.setIPLAdapter(IPLBuilderFactory.getIPLPlayer(IPLAnalyser.PlayerEnumTypes.RUNS));
             Map<String, IPLPlayerDAO> daoMap =iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.RUNS,IPL_EMPTY_FILE_PATH);
             String sortedData = iplAnalyser.getSortByField(SortByBasedOnField.Maximum_Runs_With_Average,daoMap);
             IPLMostRunsData[] runsData = new Gson().fromJson(sortedData, IPLMostRunsData[].class);
@@ -203,6 +217,8 @@ public class IPLAnalyserTest
     {
         try
         {
+            iplAnalyser.setIPLAdapter(IPLBuilderFactory.getIPLPlayer(IPLAnalyser.PlayerEnumTypes.WICKETS));
+            iplAnalyser.setIPLAdapter(IPLBuilderFactory.getIPLPlayer(IPLAnalyser.PlayerEnumTypes.WICKETS));
             Map<String, IPLPlayerDAO> result=iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.WICKETS,IPL_MOST_WKTS_FILE_PATH);
             Assert.assertEquals(99,result.size());
         }
@@ -216,6 +232,7 @@ public class IPLAnalyserTest
     {
         try
         {
+            iplAnalyser.setIPLAdapter(IPLBuilderFactory.getIPLPlayer(IPLAnalyser.PlayerEnumTypes.WICKETS));
             Map<String, IPLPlayerDAO> dataMap = iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.WICKETS,IPL_MOST_WKTS_FILE_PATH,IPL_MOST_RUNS_FILE_PATH);
             String dataString = iplAnalyser.getSortByField(SortByBasedOnField.Average, dataMap);
             IPLMostWicketsData[] wicketsData = new Gson().fromJson(dataString, IPLMostWicketsData[].class);
@@ -231,6 +248,7 @@ public class IPLAnalyserTest
     {
         try
         {
+            iplAnalyser.setIPLAdapter(IPLBuilderFactory.getIPLPlayer(IPLAnalyser.PlayerEnumTypes.WICKETS));
             Map<String,IPLPlayerDAO> daoMap=iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.WICKETS,IPL_MOST_WKTS_FILE_PATH,IPL_MOST_RUNS_FILE_PATH);
             String sortedData=iplAnalyser.getSortByField(SortByBasedOnField.Strike_Rate,daoMap);
             IPLMostWicketsData[] wicketsData=new Gson().fromJson(sortedData,IPLMostWicketsData[].class);
@@ -246,6 +264,7 @@ public class IPLAnalyserTest
     {
         try
         {
+            iplAnalyser.setIPLAdapter(IPLBuilderFactory.getIPLPlayer(IPLAnalyser.PlayerEnumTypes.WICKETS));
             Map<String,IPLPlayerDAO> daoMap=iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.WICKETS,IPL_MOST_WKTS_FILE_PATH,IPL_MOST_RUNS_FILE_PATH);
             String sortedData=iplAnalyser.getSortByField(SortByBasedOnField.Economy_Rate,daoMap);
             IPLMostWicketsData[] wicketsData=new Gson().fromJson(sortedData,IPLMostWicketsData[].class);
@@ -261,6 +280,7 @@ public class IPLAnalyserTest
     {
         try
         {
+            iplAnalyser.setIPLAdapter(IPLBuilderFactory.getIPLPlayer(IPLAnalyser.PlayerEnumTypes.WICKETS));
             Map<String,IPLPlayerDAO> daoMap=iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.WICKETS,IPL_MOST_WKTS_FILE_PATH,IPL_MOST_RUNS_FILE_PATH);
             String sortedData=iplAnalyser.getSortByField(SortByBasedOnField.Result_Of_Five_Four_Wickets,daoMap);
             IPLMostWicketsData[] wicketsData=new Gson().fromJson(sortedData,IPLMostWicketsData[].class);
@@ -276,6 +296,7 @@ public class IPLAnalyserTest
     {
         try
         {
+            iplAnalyser.setIPLAdapter(IPLBuilderFactory.getIPLPlayer(IPLAnalyser.PlayerEnumTypes.WICKETS));
             Map<String,IPLPlayerDAO> daoMap=iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.WICKETS,IPL_MOST_WKTS_FILE_PATH,IPL_MOST_RUNS_FILE_PATH);
             String sortedData=iplAnalyser.getSortByField(SortByBasedOnField.Strike_Rate_Wth_Four_Five_Wickets,daoMap);
             IPLMostWicketsData[] wicketsData=new Gson().fromJson(sortedData,IPLMostWicketsData[].class);
@@ -291,6 +312,7 @@ public class IPLAnalyserTest
     {
         try
         {
+            iplAnalyser.setIPLAdapter(IPLBuilderFactory.getIPLPlayer(IPLAnalyser.PlayerEnumTypes.WICKETS));
             Map<String,IPLPlayerDAO> daoMap=iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.WICKETS,IPL_MOST_WKTS_FILE_PATH,IPL_MOST_RUNS_FILE_PATH);
             String sortedData=iplAnalyser.getSortByField(SortByBasedOnField.Great_Average_With_Strike_Rate,daoMap);
             IPLMostWicketsData[] wicketsData=new Gson().fromJson(sortedData,IPLMostWicketsData[].class);
@@ -306,6 +328,7 @@ public class IPLAnalyserTest
     {
         try
         {
+            iplAnalyser.setIPLAdapter(IPLBuilderFactory.getIPLPlayer(IPLAnalyser.PlayerEnumTypes.WICKETS));
             Map<String,IPLPlayerDAO> daoMap=iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.WICKETS,IPL_MOST_WKTS_FILE_PATH,IPL_MOST_RUNS_FILE_PATH);
             String sortedData=iplAnalyser.getSortByField(SortByBasedOnField.Maximum_Wickets_With_Average,daoMap);
             IPLMostWicketsData[] playerDAO=new Gson().fromJson(sortedData,IPLMostWicketsData[].class);
@@ -321,6 +344,7 @@ public class IPLAnalyserTest
     {
         try
         {
+            iplAnalyser.setIPLAdapter(IPLBuilderFactory.getIPLPlayer(IPLAnalyser.PlayerEnumTypes.WICKETS));
             Map<String,IPLPlayerDAO> daoMap=iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.WICKETS,IPL_MOST_WKTS_FILE_PATH,IPL_MOST_RUNS_FILE_PATH);
             String sortedData=iplAnalyser.getSortByField(SortByBasedOnField.Maximum_Batting_With_Bowling_Average,daoMap);
             IPLPlayerDAO[] playerDAO=new Gson().fromJson(sortedData,IPLPlayerDAO[].class);
@@ -336,6 +360,7 @@ public class IPLAnalyserTest
     {
         try
         {
+            iplAnalyser.setIPLAdapter(IPLBuilderFactory.getIPLPlayer(IPLAnalyser.PlayerEnumTypes.WICKETS));
             Map<String,IPLPlayerDAO> daoMap=iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.WICKETS,IPL_MOST_WKTS_FILE_PATH,IPL_MOST_RUNS_FILE_PATH);
             String sortedData=iplAnalyser.getSortByField(SortByBasedOnField.Maximum_Wickets,daoMap);
             IPLPlayerDAO[] playerDAO=new Gson().fromJson(sortedData,IPLPlayerDAO[].class);
@@ -351,6 +376,7 @@ public class IPLAnalyserTest
     {
         try
         {
+            iplAnalyser.setIPLAdapter(IPLBuilderFactory.getIPLPlayer(IPLAnalyser.PlayerEnumTypes.RUNS));
             Map<String,IPLPlayerDAO> daoMap=iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.RUNS,IPL_MOST_RUNS_FILE_PATH,IPL_MOST_WKTS_FILE_PATH);
             String sortedData=iplAnalyser.getSortByField(SortByBasedOnField.Maximum_Runs,daoMap);
             IPLPlayerDAO[] playerDAO=new Gson().fromJson(sortedData,IPLPlayerDAO[].class);
@@ -366,6 +392,7 @@ public class IPLAnalyserTest
     {
         try
         {
+            iplAnalyser.setIPLAdapter(IPLBuilderFactory.getIPLPlayer(IPLAnalyser.PlayerEnumTypes.WICKETS));
             Map<String,IPLPlayerDAO> daoMap=iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.WICKETS,IPL_MOST_WKTS_FILE_PATH,IPL_MOST_RUNS_FILE_PATH);
             String sortedData=iplAnalyser.getSortByField(SortByBasedOnField.All_Rounder,daoMap);
             IPLPlayerDAO[] playerDAO=new Gson().fromJson(sortedData,IPLPlayerDAO[].class);

@@ -1,10 +1,10 @@
 import com.bridgelabz.CSVBuilderException;
 import ipl2019analyser.IPLAnalyser;
+import ipl2019analyser.IPLBuilderFactory;
 import ipl2019analyser.IPLPlayerDAO;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
 import java.util.Map;
 
 public class IPLBattingAdapterTest
@@ -19,6 +19,7 @@ public class IPLBattingAdapterTest
     {
         try
         {
+            iplAnalyser.setIPLAdapter(IPLBuilderFactory.getIPLPlayer(IPLAnalyser.PlayerEnumTypes.RUNS));
             ExpectedException exceptionRule = ExpectedException.none();
             exceptionRule.expect(CSVBuilderException.class);
             iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.RUNS,IPL_WRONG_FILE_PATH);
@@ -34,6 +35,7 @@ public class IPLBattingAdapterTest
     {
         try
         {
+            iplAnalyser.setIPLAdapter(IPLBuilderFactory.getIPLPlayer(IPLAnalyser.PlayerEnumTypes.RUNS));
             ExpectedException exceptionRule = ExpectedException.none();
             exceptionRule.expect(CSVBuilderException.class);
             iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.RUNS," ");
@@ -49,6 +51,7 @@ public class IPLBattingAdapterTest
     {
         try
         {
+            iplAnalyser.setIPLAdapter(IPLBuilderFactory.getIPLPlayer(IPLAnalyser.PlayerEnumTypes.RUNS));
             ExpectedException exceptionRule = ExpectedException.none();
             exceptionRule.expect(CSVBuilderException.class);
             iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.RUNS,WRONG_IPL_FILE_TYPE);
@@ -64,6 +67,7 @@ public class IPLBattingAdapterTest
     {
         try
         {
+            iplAnalyser.setIPLAdapter(IPLBuilderFactory.getIPLPlayer(IPLAnalyser.PlayerEnumTypes.RUNS));
             ExpectedException exceptionRule=ExpectedException.none();
             exceptionRule.expect(CSVBuilderException.class);
             iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.RUNS,WRONG_IPL_FILE_TYPE);
@@ -79,6 +83,7 @@ public class IPLBattingAdapterTest
     {
         try
         {
+            iplAnalyser.setIPLAdapter(IPLBuilderFactory.getIPLPlayer(IPLAnalyser.PlayerEnumTypes.RUNS));
             ExpectedException exceptionRule=ExpectedException.none();
             exceptionRule.expect(CSVBuilderException.class);
             iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.RUNS,WRONG_IPL_FILE_TYPE);
@@ -94,6 +99,7 @@ public class IPLBattingAdapterTest
     {
         try
         {
+            iplAnalyser.setIPLAdapter(IPLBuilderFactory.getIPLPlayer(IPLAnalyser.PlayerEnumTypes.RUNS));
             ExpectedException exceptionRule=ExpectedException.none();
             exceptionRule.expect(CSVBuilderException.class);
             iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.RUNS,WRONG_IPL_FILE_TYPE);
@@ -109,6 +115,7 @@ public class IPLBattingAdapterTest
     {
         try
         {
+            iplAnalyser.setIPLAdapter(IPLBuilderFactory.getIPLPlayer(IPLAnalyser.PlayerEnumTypes.RUNS));
             Map<String, IPLPlayerDAO> result=iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.RUNS,IPL_MOST_RUNS_FILE_PATH);
             Assert.assertEquals(100,result.size());
         }

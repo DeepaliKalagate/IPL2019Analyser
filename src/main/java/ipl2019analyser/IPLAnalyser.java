@@ -8,6 +8,12 @@ import com.google.gson.Gson;
 public class IPLAnalyser
 {
     Map<SortByBasedOnField,Comparator<IPLPlayerDAO>> comparatorMap =null;
+    private IPLAdapter iplAdapter;
+
+    public void setIPLAdapter(IPLAdapter iplAdapter)
+    {
+        this.iplAdapter = iplAdapter;
+    }
 
     public enum PlayerEnumTypes
     {
@@ -63,9 +69,8 @@ public class IPLAnalyser
 
     public Map<String, IPLPlayerDAO> getIPLPlayerData(PlayerEnumTypes player, String... iplFilePath) throws CSVBuilderException
     {
-        IPLAdapter iplAdapter = IPLBuilderFactory.getIPLPlayer(player);
         this.player = player;
-        Map<String, IPLPlayerDAO> map = iplAdapter.loadIPLData(iplFilePath);
+        Map<String, IPLPlayerDAO> map = this.iplAdapter.loadIPLData(iplFilePath);
         return map;
     }
 

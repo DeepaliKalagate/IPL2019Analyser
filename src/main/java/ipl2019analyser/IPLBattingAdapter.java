@@ -1,7 +1,5 @@
 package ipl2019analyser;
-
 import com.bridgelabz.CSVBuilderException;
-
 import java.util.Map;
 
 public class IPLBattingAdapter extends IPLAdapter

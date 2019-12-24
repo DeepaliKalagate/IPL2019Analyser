@@ -14,9 +14,10 @@ public class MockitoTest
 {
     @Rule
     public MockitoRule mockitoRule = MockitoJUnit.rule();
+    IPLAnalyser iplAnalyser = new IPLAnalyser();
 
     Map<String, IPLPlayerDAO> dataList = null;
-    private String IPL_MATCH_RUNS_DATA = "./src/test/resources/IPL2019FactsheetMostRuns.csv";
+    private String IPL_MOST_RUNS_FILE_PATH = "./src/test/resources/IPL2019FactsheetMostRuns.csv";
 
     @Before
     public void setUp()
@@ -36,8 +37,8 @@ public class MockitoTest
         {
             IPLAdapter iplAdapter = mock(IPLAdapter.class);
             setUp();
-            when(iplAdapter.loadIPLData(IPL_MATCH_RUNS_DATA)).thenReturn(dataList);
-            Map<String, IPLPlayerDAO> daoMap = iplAdapter.loadIPLData(IPL_MATCH_RUNS_DATA);
+            when(iplAdapter.loadIPLData(IPL_MOST_RUNS_FILE_PATH)).thenReturn(dataList);
+            Map<String, IPLPlayerDAO> daoMap = iplAdapter.loadIPLData(IPL_MOST_RUNS_FILE_PATH);
             Assert.assertEquals(5, daoMap.size());
         }
         catch (CSVBuilderException e)
@@ -52,8 +53,8 @@ public class MockitoTest
         IPLAdapter iplMostRunsAdapter = mock(IPLBuilderFactory.getIPLPlayer(IPLAnalyser.PlayerEnumTypes.RUNS).getClass());
         try
         {
-            when(iplMostRunsAdapter.loadIPLData(IPL_MATCH_RUNS_DATA)).thenReturn(dataList);
-            Map<String, IPLPlayerDAO> matchesDAOList = iplMostRunsAdapter.loadIPLData(IPL_MATCH_RUNS_DATA);
+            when(iplMostRunsAdapter.loadIPLData(IPL_MOST_RUNS_FILE_PATH)).thenReturn(dataList);
+            Map<String, IPLPlayerDAO> matchesDAOList = iplMostRunsAdapter.loadIPLData(IPL_MOST_RUNS_FILE_PATH);
             assertEquals(5, matchesDAOList.size());
         }
         catch (CSVBuilderException e)
@@ -61,6 +62,9 @@ public class MockitoTest
             e.printStackTrace();
         }
     }
+
+
+
 }
 
 
