@@ -18,8 +18,8 @@ public class IPLAnalyserTest
     public void givenIPLData_CheckFilesArePresentOrNot_ShouldReturnTrueOrFalse()
     {
         iplAnalyser.setIPLAdapter(IPLBuilderFactory.getIPLPlayer(IPLAnalyser.PlayerEnumTypes.RUNS));
-            boolean result = iplAnalyser.checkIPLDataFile(IPL_MOST_RUNS_FILE_PATH,IPL_MOST_WKTS_FILE_PATH);
-            Assert.assertEquals(true,result);
+        boolean result = iplAnalyser.checkIPLDataFile(IPL_MOST_RUNS_FILE_PATH,IPL_MOST_WKTS_FILE_PATH);
+        Assert.assertEquals(true,result);
     }
 
     @Test
