@@ -33,7 +33,7 @@ public class IPLAdapterTest
     }
 
     @Test
-    public void GivenIPLRunsData_WhenCorrect_ShouldReturnExactSize()
+    public void givenIPLRunsData_WhenCorrect_ShouldReturnExactSize()
     {
         IPLBattingAdapter iplAdapter = mock(IPLBattingAdapter.class);
         try
@@ -51,7 +51,7 @@ public class IPLAdapterTest
     }
 
     @Test
-    public void GivenIPLWicketsData_WhenCorrect_ShouldReturnExactSize()
+    public void givenIPLWicketsData_WhenCorrect_ShouldReturnExactSize()
     {
         IPLAdapter iplAdapter = mock(IPLBowlingAdapter.class);
         try

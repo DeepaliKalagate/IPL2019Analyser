@@ -57,9 +57,9 @@ public class IPLAnalyserTest
             exceptionRule.expect(CSVBuilderException.class);
             iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.RUNS,IPL_EMPTY_FILE_PATH);
         }
-        catch (CSVBuilderException e)
+        catch (CSVBuilderException exception)
         {
-            Assert.assertEquals(CSVBuilderException.ExceptionType.UNABLE_TO_PARSE, e.type);
+            Assert.assertEquals(CSVBuilderException.ExceptionType.UNABLE_TO_PARSE, exception.type);
         }
     }
 
@@ -73,9 +73,9 @@ public class IPLAnalyserTest
             exceptionRule.expect(CSVBuilderException.class);
             iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.RUNS," "," ");
         }
-        catch (CSVBuilderException e)
+        catch (CSVBuilderException exception)
         {
-            Assert.assertEquals(CSVBuilderException.ExceptionType.IPL_FILE_PROBLEM, e.type);
+            Assert.assertEquals(CSVBuilderException.ExceptionType.IPL_FILE_PROBLEM, exception.type);
         }
     }
 
@@ -88,8 +88,9 @@ public class IPLAnalyserTest
             Map<String, IPLPlayerDAO> result=iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.RUNS,IPL_MOST_RUNS_FILE_PATH,IPL_MOST_WKTS_FILE_PATH);
             Assert.assertEquals(100,result.size());
         }
-        catch (CSVBuilderException e)
+        catch (CSVBuilderException exception)
         {
+            Assert.assertEquals(CSVBuilderException.ExceptionType.IPL_FILE_PROBLEM, exception.type);
         }
     }
 
@@ -104,9 +105,9 @@ public class IPLAnalyserTest
             IPLMostRunsData[] iplRuns = new Gson().fromJson(sortByAverage, IPLMostRunsData[].class);
             Assert.assertEquals("MS Dhoni",iplRuns[0].player);
         }
-        catch (CSVBuilderException e)
+        catch (CSVBuilderException exception)
         {
-            e.printStackTrace();
+            Assert.assertEquals(CSVBuilderException.ExceptionType.IPL_FILE_PROBLEM, exception.type);
         }
     }
 
@@ -121,9 +122,9 @@ public class IPLAnalyserTest
             IPLMostRunsData[] runsData = new Gson().fromJson(sortedData, IPLMostRunsData[].class);
             Assert.assertEquals("Ishant Sharma", runsData[0].player);
         }
-        catch (CSVBuilderException e)
+        catch (CSVBuilderException exception)
         {
-            Assert.assertEquals(CSVBuilderException.ExceptionType.IPL_FILE_PROBLEM, e.type);
+            Assert.assertEquals(CSVBuilderException.ExceptionType.IPL_FILE_PROBLEM, exception.type);
         }
     }
 
@@ -138,9 +139,9 @@ public class IPLAnalyserTest
             IPLMostRunsData[] runsData = new Gson().fromJson(sortedData, IPLMostRunsData[].class);
             Assert.assertEquals("Andre Russell", runsData[0].player);
         }
-        catch (CSVBuilderException e)
+        catch (CSVBuilderException exception)
         {
-            Assert.assertEquals(CSVBuilderException.ExceptionType.IPL_FILE_PROBLEM, e.type);
+            Assert.assertEquals(CSVBuilderException.ExceptionType.IPL_FILE_PROBLEM, exception.type);
         }
     }
 
@@ -155,9 +156,9 @@ public class IPLAnalyserTest
             IPLMostRunsData[] runsData = new Gson().fromJson(sortedData, IPLMostRunsData[].class);
             Assert.assertEquals("Andre Russell", runsData[0].player);
         }
-        catch (CSVBuilderException e)
+        catch (CSVBuilderException exception)
         {
-            Assert.assertEquals(CSVBuilderException.ExceptionType.IPL_FILE_PROBLEM, e.type);
+            Assert.assertEquals(CSVBuilderException.ExceptionType.IPL_FILE_PROBLEM, exception.type);
         }
     }
 
@@ -172,9 +173,9 @@ public class IPLAnalyserTest
             IPLMostRunsData[] runsData = new Gson().fromJson(sortedData, IPLMostRunsData[].class);
             Assert.assertEquals("MS Dhoni", runsData[0].player);
         }
-        catch (CSVBuilderException e)
+        catch (CSVBuilderException exception)
         {
-            Assert.assertEquals(CSVBuilderException.ExceptionType.IPL_FILE_PROBLEM, e.type);
+            Assert.assertEquals(CSVBuilderException.ExceptionType.IPL_FILE_PROBLEM, exception.type);
         }
     }
 
@@ -189,9 +190,9 @@ public class IPLAnalyserTest
             IPLMostRunsData[] runsData = new Gson().fromJson(sortedData, IPLMostRunsData[].class);
             Assert.assertEquals("David Warner ", runsData[0].player);
         }
-        catch (CSVBuilderException e)
+        catch (CSVBuilderException exception)
         {
-            Assert.assertEquals(CSVBuilderException.ExceptionType.IPL_FILE_PROBLEM, e.type);
+            Assert.assertEquals(CSVBuilderException.ExceptionType.IPL_FILE_PROBLEM, exception.type);
         }
     }
 
@@ -206,9 +207,9 @@ public class IPLAnalyserTest
             IPLMostRunsData[] runsData = new Gson().fromJson(sortedData, IPLMostRunsData[].class);
             Assert.assertEquals(" ", runsData[0].player);
         }
-        catch (CSVBuilderException e)
+        catch (CSVBuilderException exception)
         {
-            Assert.assertEquals(CSVBuilderException.ExceptionType.IPL_FILE_PROBLEM, e.type);
+            Assert.assertEquals(CSVBuilderException.ExceptionType.IPL_FILE_PROBLEM, exception.type);
         }
     }
 
@@ -222,8 +223,9 @@ public class IPLAnalyserTest
             Map<String, IPLPlayerDAO> result=iplAnalyser.getIPLPlayerData(IPLAnalyser.PlayerEnumTypes.WICKETS,IPL_MOST_WKTS_FILE_PATH);
             Assert.assertEquals(99,result.size());
         }
-        catch (CSVBuilderException e)
+        catch (CSVBuilderException exception)
         {
+            Assert.assertEquals(CSVBuilderException.ExceptionType.IPL_FILE_PROBLEM, exception.type);
         }
     }
 
@@ -238,8 +240,9 @@ public class IPLAnalyserTest
             IPLMostWicketsData[] wicketsData = new Gson().fromJson(dataString, IPLMostWicketsData[].class);
             Assert.assertEquals("Andre Russell", wicketsData[0].player);
         }
-        catch (CSVBuilderException e)
+        catch (CSVBuilderException exception)
         {
+            Assert.assertEquals(CSVBuilderException.ExceptionType.IPL_FILE_PROBLEM, exception.type);
         }
     }
 
@@ -254,8 +257,9 @@ public class IPLAnalyserTest
             IPLMostWicketsData[] wicketsData=new Gson().fromJson(sortedData,IPLMostWicketsData[].class);
             Assert.assertEquals("Krishnappa Gowtham",wicketsData[0].player);
         }
-        catch (CSVBuilderException e)
+        catch (CSVBuilderException exception)
         {
+            Assert.assertEquals(CSVBuilderException.ExceptionType.IPL_FILE_PROBLEM, exception.type);
         }
     }
 
@@ -270,8 +274,9 @@ public class IPLAnalyserTest
             IPLMostWicketsData[] wicketsData=new Gson().fromJson(sortedData,IPLMostWicketsData[].class);
             Assert.assertEquals("Shivam Dube",wicketsData[0].player);
         }
-        catch (CSVBuilderException e)
+        catch (CSVBuilderException exception)
         {
+            Assert.assertEquals(CSVBuilderException.ExceptionType.IPL_FILE_PROBLEM, exception.type);
         }
     }
 
@@ -286,8 +291,9 @@ public class IPLAnalyserTest
             IPLMostWicketsData[] wicketsData=new Gson().fromJson(sortedData,IPLMostWicketsData[].class);
             Assert.assertEquals("Lasith Malinga",wicketsData[0].player);
         }
-        catch (CSVBuilderException e)
+        catch (CSVBuilderException exception)
         {
+            Assert.assertEquals(CSVBuilderException.ExceptionType.IPL_FILE_PROBLEM, exception.type);
         }
     }
 
@@ -302,8 +308,9 @@ public class IPLAnalyserTest
             IPLMostWicketsData[] wicketsData=new Gson().fromJson(sortedData,IPLMostWicketsData[].class);
             Assert.assertEquals("Kagiso Rabada",wicketsData[0].player);
         }
-        catch (CSVBuilderException e)
+        catch (CSVBuilderException exception)
         {
+            Assert.assertEquals(CSVBuilderException.ExceptionType.IPL_FILE_PROBLEM, exception.type);
         }
     }
 
@@ -318,8 +325,9 @@ public class IPLAnalyserTest
             IPLMostWicketsData[] wicketsData=new Gson().fromJson(sortedData,IPLMostWicketsData[].class);
             Assert.assertEquals("Andre Russell",wicketsData[0].player);
         }
-        catch (CSVBuilderException e)
+        catch (CSVBuilderException exception)
         {
+            Assert.assertEquals(CSVBuilderException.ExceptionType.IPL_FILE_PROBLEM, exception.type);
         }
     }
 
@@ -334,8 +342,9 @@ public class IPLAnalyserTest
             IPLMostWicketsData[] playerDAO=new Gson().fromJson(sortedData,IPLMostWicketsData[].class);
             Assert.assertEquals("Imran Tahir",playerDAO[0].player);
         }
-        catch (CSVBuilderException e)
+        catch (CSVBuilderException exception)
         {
+            Assert.assertEquals(CSVBuilderException.ExceptionType.IPL_FILE_PROBLEM, exception.type);
         }
     }
 
@@ -350,8 +359,9 @@ public class IPLAnalyserTest
             IPLPlayerDAO[] playerDAO=new Gson().fromJson(sortedData,IPLPlayerDAO[].class);
             Assert.assertEquals("Andre Russell",playerDAO[0].player);
         }
-        catch (CSVBuilderException e)
+        catch (CSVBuilderException exception)
         {
+            Assert.assertEquals(CSVBuilderException.ExceptionType.IPL_FILE_PROBLEM, exception.type);
         }
     }
 
@@ -366,8 +376,9 @@ public class IPLAnalyserTest
             IPLPlayerDAO[] playerDAO=new Gson().fromJson(sortedData,IPLPlayerDAO[].class);
             Assert.assertEquals("Imran Tahir",playerDAO[0].player);
         }
-        catch (CSVBuilderException e)
+        catch (CSVBuilderException exception)
         {
+            Assert.assertEquals(CSVBuilderException.ExceptionType.IPL_FILE_PROBLEM, exception.type);
         }
     }
 
@@ -382,8 +393,9 @@ public class IPLAnalyserTest
             IPLPlayerDAO[] playerDAO=new Gson().fromJson(sortedData,IPLPlayerDAO[].class);
             Assert.assertEquals("David Warner ",playerDAO[0].player);
         }
-        catch (CSVBuilderException e)
+        catch (CSVBuilderException exception)
         {
+            Assert.assertEquals(CSVBuilderException.ExceptionType.IPL_FILE_PROBLEM, exception.type);
         }
     }
 
@@ -398,8 +410,9 @@ public class IPLAnalyserTest
             IPLPlayerDAO[] playerDAO=new Gson().fromJson(sortedData,IPLPlayerDAO[].class);
             Assert.assertEquals("Andre Russell",playerDAO[0].player);
         }
-        catch (CSVBuilderException e)
+        catch (CSVBuilderException exception)
         {
+            Assert.assertEquals(CSVBuilderException.ExceptionType.IPL_FILE_PROBLEM, exception.type);
         }
     }
 }
