@@ -16,7 +16,6 @@ dependencies {
     compile(files("/home/user/Desktop/JarFilesDemo/out/artifacts/JarFilesDemo_jar/JarFilesDemo.jar"))
     compile "com.opencsv:opencsv:4.0"
     compile 'com.google.code.gson:gson:2.2.+'
-
-    testCompile 'org.mockito:mockito-core:2.7.22'
+    testCompile 'org.mockito:mockito-core:3.+'
 }
 

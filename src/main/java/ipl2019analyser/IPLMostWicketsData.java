@@ -4,6 +4,8 @@ import com.opencsv.bean.CsvBindByName;
 
 public class IPLMostWicketsData
 {
+    @CsvBindByName(column = "POS")
+    public int position;
     @CsvBindByName(column = "PLAYER")
     public String  player;
     @CsvBindByName(column = "Wkts")
@@ -23,8 +25,9 @@ public class IPLMostWicketsData
     {
     }
 
-    public IPLMostWicketsData(String player,int wickets,double bowlingAverage, double economyRate, double strikeRate, int numberOfFourWkts, int numberOfFiveWkts)
+    public IPLMostWicketsData(int position,String player,int wickets,double bowlingAverage, double economyRate, double strikeRate, int numberOfFourWkts, int numberOfFiveWkts)
     {
+        this.position=position;
         this.player = player;
         this.wickets = wickets;
         this.bowlingAverage = bowlingAverage;
@@ -40,6 +43,7 @@ public class IPLMostWicketsData
     @Override
     public String toString() {
         return "IPLMostWicketsData{" +
+                "position='"+position+'\''+
                 "player='" + player + '\'' +
                 ", wickets=" + wickets +
                 ", bowlingAverage=" + bowlingAverage +

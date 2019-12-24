@@ -10,6 +10,12 @@ public class IPLAnalyser
 {
     Map<SortByBasedOnField,Comparator<IPLPlayerDAO>> comparatorMap =null;
 
+    private IPLAdapter iplAdapter;
+
+    public void setIplAdapter(IPLAdapter iplAdapter) {
+        this.iplAdapter = iplAdapter;
+    }
+
     public enum PlayerEnumTypes
     {
         RUNS,WICKETS

@@ -2,7 +2,7 @@ package ipl2019analyser;
 
 public class IPLPlayerDAO
 {
-
+    public int position;
     public String  player;
     public int runs;
     public double average;
@@ -19,6 +19,7 @@ public class IPLPlayerDAO
     public IPLPlayerDAO(IPLMostRunsData iplMostRunsData)
     {
         player=iplMostRunsData.player;
+        position=iplMostRunsData.position;
         runs=iplMostRunsData.runs;
         average =iplMostRunsData.average;
         strikeRate =iplMostRunsData.strikeRate;
@@ -30,10 +31,34 @@ public class IPLPlayerDAO
     {
         player=iplMostWicketsData.player;
         wickets=iplMostWicketsData.wickets;
+        position=iplMostWicketsData.position;
         bowlingAverage =iplMostWicketsData.bowlingAverage;
         economyRate =iplMostWicketsData.economyRate;
         strikeRate=iplMostWicketsData.strikeRate;
         numberOfFourWkts=iplMostWicketsData.numberOfFourWkts;
         numberOfFiveWkts=iplMostWicketsData.numberOfFiveWkts;
+    }
+
+    public IPLPlayerDAO( int position,String player, int runs,double average,double strikeRate)
+    {
+
+    }
+
+    @Override
+    public String toString() {
+        return "IPLPlayerDAO{" +
+                "position=" + position +
+                ", player='" + player + '\'' +
+                ", runs=" + runs +
+                ", average=" + average +
+                ", bowlingAverage=" + bowlingAverage +
+                ", strikeRate=" + strikeRate +
+                ", numberOfFours=" + numberOfFours +
+                ", numberOfSixes=" + numberOfSixes +
+                ", numberOfFourWkts=" + numberOfFourWkts +
+                ", numberOfFiveWkts=" + numberOfFiveWkts +
+                ", economyRate=" + economyRate +
+                ", wickets=" + wickets +
+                '}';
     }
 }

@@ -3,6 +3,8 @@ import com.opencsv.bean.CsvBindByName;
 
 public class IPLMostRunsData
 {
+    @CsvBindByName(column = "POS")
+    public int  position;
     @CsvBindByName(column = "PLAYER")
     public String  player;
     @CsvBindByName(column = "Runs")
@@ -20,8 +22,9 @@ public class IPLMostRunsData
     {
     }
 
-    public IPLMostRunsData(String player, int runs, double average,double strikeRate,int numberOfFours, int numberOfSixes)
+    public IPLMostRunsData(int position,String player, int runs, double average,double strikeRate,int numberOfFours, int numberOfSixes)
     {
+        this.position=position;
         this.player = player;
         this.runs = runs;
         this.average = average;
@@ -36,6 +39,7 @@ public class IPLMostRunsData
     @Override
     public String toString() {
         return "IPLMostRunsData{" +
+                "position='"+position+'\''+
                 "player='" + player + '\'' +
                 ", runs=" + runs +
                 ", average=" + average +
