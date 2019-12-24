@@ -2,19 +2,12 @@ package ipl2019analyser;
 import java.io.File;
 import java.util.*;
 import java.util.stream.Collectors;
-
 import com.bridgelabz.CSVBuilderException;
 import com.google.gson.Gson;
 
 public class IPLAnalyser
 {
     Map<SortByBasedOnField,Comparator<IPLPlayerDAO>> comparatorMap =null;
-
-    private IPLAdapter iplAdapter;
-
-    public void setIplAdapter(IPLAdapter iplAdapter) {
-        this.iplAdapter = iplAdapter;
-    }
 
     public enum PlayerEnumTypes
     {
